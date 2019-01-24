@@ -2,6 +2,12 @@
 * Titre : main.cpp - Travail Pratique #1
 * Date : 09 Janvier 2019 
 * Auteur : David Dratwa
+//git fetch
+//git merge
+//git add <new files>
+//git commit -m "message"
+//git push
+
 */
 
 #include "Restaurant.h"
