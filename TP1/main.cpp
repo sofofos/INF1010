@@ -41,5 +41,5 @@ int main() {
 	//afficher le restaurant 
 	poly.afficher(); 
 	return 0;
-
+	//allo allo
 }
