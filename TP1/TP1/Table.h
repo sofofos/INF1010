@@ -16,9 +16,9 @@ public:
 	Table(int id, int nbPlaces);
 
 	//getters 
-	int getId(); 
-	int getNbPlaces(); 
-	bool estOccupee(); 
+	int getId() const; 
+	int getNbPlaces() const; 
+	bool estOccupee() const; 
 
 	//setters 
 	void libererTable(); 
