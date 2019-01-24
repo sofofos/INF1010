@@ -20,16 +20,16 @@ public:
 
 
 	//getters
-	int getNbPlats(); 
+	int getNbPlats() const;
 	
 	//affichage 
-	void afficher(); 
+	void afficher() const;
 
 	//methodes en plus
 	Plat* trouverPlat(string& nom); 
-	void ajouterPlat(Plat & plat); 
-	void ajouterPlat(string& nom, double montant, double cout); 
-	bool lireMenu(string& fichier); 
+	void ajouterPlat(Plat& plat);
+	void ajouterPlat(string& nom, double montant, double cout);
+	bool lireMenu(string& fichier);
 	
 private : 
 	unsigned int capacite_;
