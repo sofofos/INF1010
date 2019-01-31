@@ -76,13 +76,17 @@ double Table::getChiffreAffaire() const {
 
 void Table::afficher() {
 	cout << "La table numero " << id_ << " est ";
-	if (occupee_)
+	if (occupee_) {
 		cout << "occupee. ";
+		if (nbPlats_ == 0)
+			cout << "Mais ils n'ont rien commande pour l'instant. \n \n";
+		else {
+			cout << "Voici la commande placee par les clients : \n";
+			for (unsigned int i = 0; i < nbPlats_; i++)
+				commande_[i]->afficher();
+			cout << "\n";
+		}
+	}
 	else
 		cout << "libre. ";
-	if (nbPlats_ == 0)
-		cout << "Mais ils n'ont rien commande pour l'instant"
-	
-
-
 }
