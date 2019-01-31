@@ -1,12 +1,13 @@
 /*
-* Titre : main.cpp - Travail Pratique #1
-* Date : 09 Janvier 2019 
-* Auteur : David Dratwa
-//git fetch
-//git merge
-//git add <new files>
-//git commit -m "message"
-//git push
+* Titre : Menu.cpp - Travail Pratique #1
+* Date : 24 Janvier 2019
+* Auteur : Sofia Alvarez (1894026) & Justin de Meulemeester(1897007)
+ // A enlever ci-bas avant de remettre!!
+git fetch
+git merge
+git add <new files>
+git commit -m "message"
+git push
 
 */
 
@@ -38,14 +39,14 @@ int main() {
 	
 
 	//afficher le restaurant
-	poly.afficher(); 
+	//poly.afficher();
 
 	cout << "-------------------------------------------------" << endl; 
 
 	//liberer les tables 
 
 	//afficher le restaurant 
-	poly.afficher(); 
+	//poly.afficher();
 	return 0;
 	//allo allo allo
 }

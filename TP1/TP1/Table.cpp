@@ -1,3 +1,8 @@
+/*
+* Titre : Menu.cpp - Travail Pratique #1
+* Date : 24 Janvier 2019
+* Auteur : Sofia Alvarez (1894026) & Justin de Meulemeester(1897007)
+*/
 #include "Table.h"
 #include <iostream>
 
@@ -48,7 +53,7 @@ void Table::setId(int id) {
 	id_ = id;
 }
 
-//Autres méthodes
+//Autres methodes
 void Table::commander(Plat* plat) {
 	if (nbPlats_ >= capacite_) {
 		unsigned int capaciteDouble = 2 * capacite_;

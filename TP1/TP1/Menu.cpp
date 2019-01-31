@@ -1,7 +1,7 @@
 /*
 * Titre : Menu.cpp - Travail Pratique #1
 * Date : 24 Janvier 2019
-* Auteur : Sofia Alvarez
+* Auteur : Sofia Alvarez (1894026) & Justin de Meulemeester(1897007)
 *
 *
 */
@@ -13,6 +13,7 @@
 
 using namespace std;
 
+//Constructeur par defaut
 Menu::Menu()
 {
 
@@ -26,14 +27,16 @@ Menu::Menu()
 
 }
 
+//Constructeur avec parametres
 Menu::Menu(string fichier, TypeMenu type){
     type_ = type;
 
     lireMenu(fichier);
 }
+Menu::~Menu(){
+};
 
-
-
+// getters
 int Menu::getNbPlats() const {
     return nbPlats_;
 
@@ -44,7 +47,7 @@ int Menu::getNbPlats() const {
          << "Type de menu: " ;
     switch(type_){
         case Matin:
-            cout << "Matin " << endl
+            cout << "Matin " << endl;
             break;
         case Midi:
             cout << "Midi " << endl;
