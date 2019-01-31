@@ -19,9 +19,9 @@ Menu::Menu()
     capacite_ = MAXPLAT;
     nbPlats_= 0;
     type_ = Matin;
-    for (int i = 0; i < MAXPLAT; i++)
-    {
-        listePlats.push_back(new Plat());
+
+    for(int i =0; i < MAXPLAT; ++i){
+    listePlats_[i] = new Plat();
     }
 
 }
@@ -29,37 +29,34 @@ Menu::Menu()
 Menu::Menu(string fichier, TypeMenu type){
     type_ = type;
 
-    string strMenu;
-
-    ifstream ficMenu;
-    ficMenu.open(fichier);
-
-    while(!ws(ficMenu).eof()){
-        getline(ficMenu,strMenu);
-
-        if(strMenu[0] == '-'){
-            strMenu = strMenu.substr(1);
-            //if(strMenu == 'MATIN'){}
-        }
-        // switch (TypeMenu) {
-        //     case 'Matin': cout << "   ";
-        //     case 'Midi' : cout << "   ";
-        //     case 'Soir' : cout << "   ";
-        // }
-    }
+    lireMenu(fichier);
 }
 
 
-}
 
 int Menu::getNbPlats() const {
     return nbPlats_;
 
 }
  void Menu::afficher() const {
-    cout << "Voici son menu " << endl;
-
-
+    cout << "Capacité: " << capacite_ << endl
+         << "Nombre de plats: " << nbPlats_ << endl
+         << "Type de menu: " ;
+    switch(type_){
+        case Matin:
+            cout << "Matin " << endl
+            break;
+        case Midi:
+            cout << "Midi " << endl;
+            break;
+        case Soir:
+            cout << "Soir " << endl;
+    }
+    for (int i = 0; i < nbPlats_; ++i){
+        cout << listePlats_[i] -> getNom() << ": "
+             << "Coût: " << listePlats_[i] -> getCout() << " "
+             << "Prix: " << listePlats_[i] -> getPrix() << endl;
+    }
 }
 
 Plat* Menu::trouverPlat(string &nom) {
@@ -75,15 +72,13 @@ Plat* Menu::trouverPlat(string &nom) {
 }
 
 void Menu::ajouterPlat(Plat &plat) {
-    //if(nbPlats_ < capacite_){ // faut-il verifier la capacite? a confirmer
-        listePlats_[nbPlats_] = &plat; //dereferencement
-   // }else{}
+    // faut verifier la capacite
 
-    // listePlats_.pushback(&plat); // verifier si on peut utiliser pushback
+     listePlats_[nbPlats_] = &plat;
 }
 
 void Menu::ajouterPlat(string &nom, double montant, double cout) {
-  //  listePlats_.push_back(new Plat(nom,montant,cout));
+
   Plat* plat = new Plat(nom, montant, cout);
 
   listePlats_[nbPlats_] = plat;
@@ -91,36 +86,35 @@ void Menu::ajouterPlat(string &nom, double montant, double cout) {
 }
 
 bool Menu::lireMenu(string &fichier) {
+
     TypeMenu type;
 
-    string menuLine;
+    string menuLine, nom;
+    double montant, cout;
 
     ifstream ficMenu;
     ficMenu.open(fichier);
 
-    while(!ws(ficMenu).eof()){
+    if(ficMenu.fail()){
+        return false;
+    }
+
+    while(!ws(ficMenu).eof()) {
         getline(ficMenu,menuLine);
 
-        // ajouter un while pour dire "lire jusqua trouver le type desiree et ensuite un autre while pour lire le reste du menu
         if(menuLine == "-MATIN"){
             type = Matin;
         }
         if(menuLine == "-MIDI"){
             type = Midi;
-        } if(menuLine == "-SOIR"){
+        }
+        if(menuLine == "-SOIR"){
             type = Soir;
         }
-        if(type == type_){ // ajouter un while
-            getline(ficMenu,menuLine){ // optimiser la comparaison de type
-                // lire et storer chaque mot dans la variable approprie, et utiliser la methode ajouterPlat qui prends nom, montant cout en parametre
-            }
+        while(type == type_){
+            ficMenu >> nom >> montant >> cout;
+            ajouterPlat(nom, montant, cout);
         }
-
-
-//        if(menuLine[0] == '-'){
-//            menuLine = menuLine.substr(1); // lire doit storer dans listePlats
-//        }
-
-
     }
+
 }
