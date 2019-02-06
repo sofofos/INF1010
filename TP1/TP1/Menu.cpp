@@ -2,122 +2,179 @@
 * Titre : Menu.cpp - Travail Pratique #1
 * Date : 24 Janvier 2019
 * Auteur : Sofia Alvarez (1894026) & Justin de Meulemeester(1897007)
-*
-*
 */
 
 #include "Menu.h"
-#include <iostream>
-#include <fstream>
-#include <string>
 
-using namespace std;
 
-//Constructeur par defaut
-Menu::Menu()
-{
-
-    capacite_ = MAXPLAT;
-    nbPlats_= 0;
-    type_ = Matin;
-
-    for(int i =0; i < MAXPLAT; ++i){
-    listePlats_[i] = new Plat();
-    }
-
+//Constructeurs
+Menu::Menu() {
+	capacite_ = MAXPLAT;
+	listePlats_ = new Plat*[MAXPLAT];
+	nbPlats_ = 0;
+	type_ = Matin;
+}
+Menu::Menu(string fichier, TypeMenu type) {
+	type_ = type;
+	capacite_ = MAXPLAT;
+	listePlats_ = new Plat*[MAXPLAT];
+	nbPlats_ = 0;
+	lireMenu(fichier);
 }
 
-//Constructeur avec parametres
-Menu::Menu(string fichier, TypeMenu type){
-    type_ = type;
-
-    lireMenu(fichier);
+//Destructeur
+Menu::~Menu() {
+	delete[] listePlats_;
+	listePlats_ = nullptr;
 }
-Menu::~Menu(){
-};
 
-// getters
+//Getters
 int Menu::getNbPlats() const {
-    return nbPlats_;
-
-}
- void Menu::afficher() const {
-    cout << "Capacité: " << capacite_ << endl
-         << "Nombre de plats: " << nbPlats_ << endl
-         << "Type de menu: " ;
-    switch(type_){
-        case Matin:
-            cout << "Matin " << endl;
-            break;
-        case Midi:
-            cout << "Midi " << endl;
-            break;
-        case Soir:
-            cout << "Soir " << endl;
-    }
-    for (int i = 0; i < nbPlats_; ++i){
-        cout << listePlats_[i] -> getNom() << ": "
-             << "Coût: " << listePlats_[i] -> getCout() << " "
-             << "Prix: " << listePlats_[i] -> getPrix() << endl;
-    }
+	return nbPlats_;
 }
 
-Plat* Menu::trouverPlat(string &nom) {
-    for (int i = 0; i < nbPlats_; i++)
-    {
-        if (listePlats_[i] -> getNom() == nom)
-        {
-            return listePlats_[i];
-        }
-    }
-
-    return nullptr;
+/**
+* Affiche le menu, c'est-à-dire la liste de plats du matin, du midi et du soir.
+*/
+void Menu::afficher() const {
+	switch (type_) {
+	case Matin:
+		cout << "Matin :\n";
+		break;
+	case Midi:
+		cout << "Midi :\n";
+		break;
+	case Soir:
+		cout << "Soir :\n";
+		break;
+	default:
+		break;
+	}
+	for (unsigned int i = 0; i < nbPlats_; i++)
+		listePlats_[i]->afficher();
 }
 
-void Menu::ajouterPlat(Plat &plat) {
-    // faut verifier la capacite
-
-     listePlats_[nbPlats_] = &plat;
+/**
+* Trouve un plat parmi une liste de plats, grâce au nom du plat.
+*
+* \param [in] nom
+*        Le nom du plat.
+*
+* retourne un pointeur vers le plat en question (pointeur nul si le plat n'est pas trouvé).
+*/
+Plat* Menu::trouverPlat(string& nom) {
+	for (unsigned int i = 0; i < nbPlats_; i++) {
+		if (listePlats_[i]->getNom() == nom)
+			return listePlats_[i];
+	}
+	return nullptr; //Si ca ne trouve pas le plat, ca retourne nullPtr.
 }
 
-void Menu::ajouterPlat(string &nom, double montant, double cout) {
+/**
+* Ajoute un plat à la liste de plats.
+*
+* \param [in] plat.
+*        Le plat à ajouter.
+*/
+void Menu::ajouterPlat(Plat& plat) {
+	//Alloue plus d'espaces si il en manque.
+	if (nbPlats_ >= capacite_) {
+		unsigned int capaciteDouble = 2 * capacite_;
+		Plat** listePlatsDouble = new Plat*[capaciteDouble];
 
-  Plat* plat = new Plat(nom, montant, cout);
+		for (unsigned int i = 0; i < capacite_; i++)
+			listePlatsDouble[i] = listePlats_[i];
 
-  listePlats_[nbPlats_] = plat;
-
+		delete[] listePlats_;
+		listePlats_ = listePlatsDouble;
+		capacite_ = capaciteDouble;
+	}
+	//Ajoute le plat à la liste.
+	listePlats_[nbPlats_] = &plat;
+	nbPlats_++;
 }
 
-bool Menu::lireMenu(string &fichier) {
+/**
+* Ajoute un plat à la liste de plats.
+*
+* \param [in] nom
+*        Le nom du plat.
+* \param [in] montant
+*		 Le prix du plat.
+* \param [in] cout
+*		 Le cout du plat.
+*/
+void Menu::ajouterPlat(string& nom, double montant, double cout) {
+	//Alloue plus d'espaces si il en manque.
+	if (nbPlats_ >= capacite_) {
+		unsigned int capaciteDouble = 2 * capacite_;
+		Plat** listePlatsDouble = new Plat*[capaciteDouble];
 
-    TypeMenu type;
+		for (unsigned int i = 0; i < capacite_; i++)
+			listePlatsDouble[i] = listePlats_[i];
 
-    string menuLine, nom;
-    double montant, cout;
+		delete[] listePlats_;
+		listePlats_ = listePlatsDouble;
+		capacite_ = capaciteDouble;
+	}
+	//Ajoute le plat à la liste.
+	listePlats_[nbPlats_] = new Plat(nom, montant, cout);
+	nbPlats_++;
+}
 
-    ifstream ficMenu;
-    ficMenu.open(fichier);
+/**
+* Permet de remplir le menu, en lisant un fichier.
+*
+* \param [in] fichier
+*        Le fichier contenant le menu.
+*
+* retourne un bool qui indique si le fichier a bien été lu.
+*/
+bool Menu::lireMenu(string& fichier) {
+	//Ouverture et verification du fichier.
+	fstream fichierEntree;
+	fichierEntree.open(fichier);
+	if (fichierEntree.fail())
+		return false;
 
-    if(ficMenu.fail()){
-        return false;
-    }
+	//Détermine le string qui marque le début de la section à lire.
+	string strMenu;
+	switch (type_) {
+	case Matin:
+		strMenu = "-MATIN";
+		break;
+	case Midi:
+		strMenu = "-MIDI";
+		break;
+	case Soir:
+		strMenu = "-SOIR";
+		break;
+	default:
+		break;
+	}
+	string ligne;
+	do {
+		getline(fichierEntree, ligne); //Continue de lire les lignes du fichier, jusqu'à ce 
+	} while (ligne != strMenu);        //la ligne correspond à celle de strMenu.
 
-    while(!ws(ficMenu).eof()) {
-        getline(ficMenu,menuLine);
+	char unChar;
+	string nom;
+	double prix;
+	double cout;
+	string finDeLigne;
 
-        if(menuLine == "-MATIN"){
-            type = Matin;
-        }
-        if(menuLine == "-MIDI"){
-            type = Midi;
-        }
-        if(menuLine == "-SOIR"){
-            type = Soir;
-        }
-        while(type == type_){
-            ficMenu >> nom >> montant >> cout;
-            ajouterPlat(nom, montant, cout);
-        }
-    }
+	while (true) {
+		fichierEntree.get(unChar);
+		if (unChar == '-')						//Verifie si le prochain caractère est un tiret.
+			break;								//Si oui, la boucle se termine
+		else
+			fichierEntree.unget();				//Si non, on unget unChar pour ne pas sauter un caractere.
 
+		fichierEntree >> nom >> prix >> cout;
+		getline(fichierEntree, finDeLigne);		//Lit le caractere de fin de ligne
+												//pour passer a la prochaine ligne.
+		ajouterPlat(nom, prix, cout);
+	}
+	fichierEntree.close();						//Fermeture du fichier.
+	return true;
 }
