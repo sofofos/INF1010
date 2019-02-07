@@ -28,6 +28,9 @@ public:
 	void setPrix(double prix);
 
 	///methodes en plus
+	friend ostream& operator<<(ostream& out, const Plat& plat);
+	friend bool operator<(const Plat& plat1, const Plat& plat2);
+
 	void afficher() const; // A MODIFIER
 
 private:
