@@ -10,27 +10,39 @@
 
 Menu::Menu() {
 	capacite_ = MAXPLAT;
-	listePlats_ = new Plat*[capacite_];
 	nbPlats_ = 0;
 	type_ = Matin;
+	for(int i = 0; i < MAXPLAT; i++){
+		listePlats.pushback(new Plat());
+	}
 }
 
 Menu::Menu(string fichier, TypeMenu type) {
 	capacite_ = MAXPLAT;
-	listePlats_ = new Plat*[capacite_];
 	nbPlats_ = 0;
 	type_ = type;
+	for(int i = 0; i < MAXPLAT; i++){
+		listePlats.pushback(new Plat());
+	}
 
 	//lecture du fichier -- creation du menu
 	lireMenu(fichier);
 }
 
+Menu::Menu(const Menu& menu){
+	capacite = menu.capacite_;
+	nPlats = menu.nPlats;
+	type = menu.type_;
+	listePlats = menu.listePlats;
+
+}
 //destructeur
 Menu::~Menu() {
 	// A MODIFIER
 	for (int i = 0; i < nbPlats_; i++)
-		delete listePlats_[i];
-	delete[] listePlats_;
+		delete listePlats[i];
+	}
+
 }
 
 //getters
@@ -45,36 +57,15 @@ void Menu::afficher() const {
 
 	for (int i = 0; i < nbPlats_; i++) {
 		cout << "\t";
-		listePlats_[i]->afficher();
+		listePlats[i]->afficher();
 
 	}
 }
 
-void Menu::ajouterPlat(const Plat &  plat) {
-	// A MODIFIER
-	if (nbPlats_ == capacite_) {
-		if (capacite_ == 0) {
-			capacite_ = 1;
-			delete[] listePlats_;
-			listePlats_ = new Plat*[1];
-
-		}
-		else {
-			capacite_ *= 2;
-			Plat** listeTemp = new Plat*[capacite_];
-			for (int i = 0; i < nbPlats_; i++) {
-				listeTemp[i] = listePlats_[i];
-			}
-
-			delete[] listePlats_;
-			listePlats_ = listeTemp;
-
-		}
-	}
-
-	listePlats_[nbPlats_] = new Plat(plat);
-	nbPlats_++;
-}
+// void Menu::ajouterPlat(const Plat &plat) {
+// 	// A MODIFIER //DONE
+// 	listePlats.pushback(&plat);
+// }
 
 
 bool Menu::lireMenu(const string& fichier) {
@@ -161,28 +152,41 @@ bool Menu::lireMenu(const string& fichier) {
 	}
 }
 
-Plat * Menu::trouverPlatMoinsCher() const
+Plat* Menu::trouverPlatMoinsCher() const
 {
-	Plat minimum(*listePlats_[0]);
+	Plat minimum(*listePlats[0]);
 	int found = -1;
 
-	for (unsigned i = 0; i < listePlats_.size(); ++i)
+	for (unsigned i = 0; i < listePlats.size(); ++i)
 	{
-		if (*listePlats_[i] < minimum)
+		if (*listePlats[i] < minimum)
 		{
-			minimum = *listePlats_[i];
+			minimum = *listePlats[i];
 			found = i;
 		}
 	}
 
-	return listePlats_[found];
+	return listePlats[found];
 
 }
 
 Plat* Menu::trouverPlat(const string& nom) const {
 	for (int i = 0; i < nbPlats_; i++) {
-		if (listePlats_[i]->getNom() == nom)
-			return listePlats_[i];
+		if (listePlats[i]->getNom() == nom)
+			return listePlats[i];
 	}
 	return nullptr;
 }
+
+friend ostream& operator<<(ostream& out, const Menu& menu){
+	out << "Menu du: " menu.type_ << " - " << menu.nbPlats_ <<
+	"  -  " << endl;
+	for(int i = 0; i < menu.nbPlats_; i++){
+		out << "\t" << listePlats[i] << endl;
+ 	}
+}
+Plat& Plat::operator+=(const Plat& plat){
+	return listePlats.pushback(&plat);
+}
+Menu& Menu::operator=(const Menu& menu){}
+//page 603 constructeur par copie in Big C++
