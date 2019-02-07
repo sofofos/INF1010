@@ -9,6 +9,10 @@
 
 #include "Plat.h"
 #include <fstream>
+#include <vector>
+#include <iostream>
+
+using namespace std;
 
 enum TypeMenu{Matin, Midi, Soir};
 const int MAXPLAT = 5;
@@ -30,13 +34,15 @@ public:
 	//methodes en plus
 	Plat* trouverPlat(const string& nom) const; // A MODIFIER
 	Plat * trouverPlatMoinsCher() const; // Utilise les vecteurs (NE PAS MODIFIER)
-	void ajouterPlat(const Plat & plat); // A MODIFIER
+	//void ajouterPlat(const Plat & plat); // A MODIFIER
 	bool lireMenu(const string& fichier);
+	friend ostream& operator<<(ostream& out, const Menu& menu)
+	Plat& Plat::operator+=(const Plat& plat)
 
 private :
 	// A MODIFIER
 	int capacite_;
-	Plat** listePlats_;
+	vector<Plat*> listePlats;
 	int nbPlats_;
 	TypeMenu type_;
 
