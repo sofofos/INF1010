@@ -35,6 +35,8 @@ public:
 
 	void placerClients(int nbClients);
 
+	friend ostream& operator<<(ostream& out, const Restaurant& restaurant);
+
 private:
 	string* nom_;
 
@@ -49,8 +51,6 @@ private:
 	// A MODIFIER
 
 	//liste des tables
-	int capaciteTables_;
-	Table** tables_;
-	int nbTables_;
+	vector<Table*> tables_;
 };
 #endif // !RESTAURANT_H

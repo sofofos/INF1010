@@ -17,12 +17,6 @@ Restaurant::Restaurant() {
 	menuMatin_ = new Menu("menu.txt", Matin);
 	menuMidi_ = new Menu("menu.txt", Midi);
 	menuSoir_ = new Menu("menu.txt",  Soir);
-
-	capaciteTables_ = INTTABLES;
-	nbTables_ = 0;
-	tables_ = new Table*[capaciteTables_];
-
-
 }
 
 Restaurant::Restaurant(const string& fichier,  const string& nom, TypeMenu moment) {
@@ -36,11 +30,6 @@ Restaurant::Restaurant(const string& fichier,  const string& nom, TypeMenu momen
 	menuMidi_ = new Menu(fichier,  Midi);
 	menuSoir_ = new Menu(fichier,  Soir);
 
-
-	capaciteTables_ = INTTABLES;
-	nbTables_ = 0;
-	tables_ = new Table*[capaciteTables_];
-
 	lireTable(fichier);
 }
 //destructeur
@@ -50,10 +39,8 @@ Restaurant::~Restaurant() {
 	delete menuMidi_;
 	delete menuSoir_;
 
-	//A MODIFIER
-	for (int i = 0; i < nbTables_; i++)
+	for (int i = 0; i < tables_.size(); i++)
 		delete tables_[i];
-	delete[] tables_;
 }
 
 
@@ -72,44 +59,20 @@ TypeMenu Restaurant::getMoment() const {
 }
 
 //autres methodes
-
-
 void Restaurant::libererTable(int id) {
-	for (int i = 0; i < nbTables_; i++) {
+	for (int i = 0; i < tables_.size(); i++) {
 		if (id == tables_[i]->getId()) {
 			chiffreAffaire_ += tables_[i]->getChiffreAffaire();
 			tables_[i]->libererTable();
 		}
 	}
 }
-void Restaurant::afficher() const {
-	cout << "Le restaurant " << *nom_;
-	if (chiffreAffaire_ != 0)
-		cout << " a fait un chiffre d'affaire de : " << chiffreAffaire_ << "$" << endl;
-	else
-		cout << " n'a pas fait de benefice ou le chiffre n'est pas encore calcule." << endl;
-	cout << "-Voici les tables : " << endl;
-	for (int i = 0; i < nbTables_; i++) {
-		cout << "\t";
-		tables_[i]->afficher();
-		cout << endl;
-	}
-	cout << endl;
 
-
-	cout << "-Voici son menu : " << endl;
-	cout << "Matin : " << endl;
-	menuMatin_->afficher();
-	cout << "Midi : " << endl;
-	menuMidi_->afficher();
-	cout << "Soir : " << endl;
-	menuSoir_->afficher();
-}
 
 void Restaurant::commanderPlat(const string& nom, int idTable) {
 	Plat* plat = nullptr;
 	int index;
-	for (int i = 0; i < nbTables_; i++) {
+	for (int i = 0; i < tables_.size(); i++) {
 		if (idTable == tables_[i]->getId()) {
 			index = i;
 			switch (momentJournee_) {
@@ -173,22 +136,7 @@ void Restaurant::lireTable(const string& fichier) {
 }
 
 void Restaurant::ajouterTable(int id, int nbPlaces) {
-	// A MODIFIER
-	if (nbTables_ == capaciteTables_) {
-		capaciteTables_ *= 2;
-		Table** temp = new Table*[capaciteTables_];
-
-		for (int i = 0; i < nbTables_; i++) {
-			temp[i] = tables_[i];
-		}
-
-		delete[] tables_;
-		tables_ = temp;
-
-	}
-
-	tables_[nbTables_] = new Table(id, nbPlaces);
-	nbTables_++;
+	tables_.push_back(new Table(id, nbPlaces));
 }
 
 void Restaurant::placerClients(int nbClients) {
@@ -196,7 +144,7 @@ void Restaurant::placerClients(int nbClients) {
 	int minimum = 100;
 
 
-	for (int i = 0; i < nbTables_; i++) {
+	for (unsigned int i = 0; i < tables_.size(); i++) {
 		if (tables_[i]->getNbPlaces() >= nbClients && !tables_[i]->estOccupee() && tables_[i]->getNbPlaces() < minimum) {
 			indexTable = i;
 			minimum = tables_[i]->getNbPlaces();
@@ -206,4 +154,34 @@ void Restaurant::placerClients(int nbClients) {
 		cout << "Erreur : il n'y a plus/pas de table disponible pour le client. " << endl;
 	}else
 	tables_[indexTable]->placerClient(nbClients);
+}
+
+
+
+//Surcharge d'opérateurs
+
+ostream& operator<<(ostream& out, const Restaurant& restaurant) {
+	out << "Le restaurant " << *(restaurant.nom_);
+	if (restaurant.chiffreAffaire_ != 0)
+		out << " a fait un chiffre d'affaire de : " << restaurant.chiffreAffaire_ << "$" << endl;
+	else
+		out << " n'a pas fait de benefice ou le chiffre n'est pas encore calcule." << endl;
+	out << "-Voici les tables : " << endl;
+	for (int i = 0; i < restaurant.tables_.size(); i++) {
+		out << "\t";
+		out << restaurant.tables_[i];
+		out << endl;
+	}
+	out << endl;
+
+
+	out << "-Voici son menu : " << endl;
+	out << "Matin : " << endl;
+	out << restaurant.menuMatin_;
+	out << "Midi : " << endl;
+	out << restaurant.menuMidi_;
+	out << "Soir : " << endl;
+	out << restaurant.menuSoir_;
+
+	return out;
 }
