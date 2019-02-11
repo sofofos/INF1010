@@ -38,8 +38,9 @@ public:
 	Plat * trouverPlatMoinsCher() const; // Utilise les vecteurs (NE PAS MODIFIER)
 	//void ajouterPlat(const Plat & plat); // A MODIFIER
 	bool lireMenu(const string& fichier);
-	friend ostream& operator<<(ostream& out, const Menu& menu)
-	Plat& Plat::operator+=(const Plat& plat)
+	friend ostream& operator<<(ostream& out, const Menu& menu);
+	Menu& operator+=(const Plat& plat);
+	Menu& operator=(const Menu& menu);
 
 private :
 	// A MODIFIER

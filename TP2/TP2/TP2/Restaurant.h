@@ -23,6 +23,7 @@ public:
 
 	//setters
 	void setMoment(TypeMenu moment);
+	void setNom(const string& nom);
 
 	//getters
 	string getNom() const;

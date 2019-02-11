@@ -60,7 +60,7 @@ bool Menu::lireMenu(const string& fichier) {
 	ifstream file(fichier, ios::in);
 
 	if (!file) {
-		//cout << "ERREUR : le fichier n'a pas pu etre ouvert" << endl;
+		cout << "ERREUR : le fichier n'a pas pu etre ouvert" << endl;
 		return false;
 	}
 	else {
@@ -173,9 +173,6 @@ friend ostream& operator<<(ostream& out, const Menu& menu){
 		out << "\t" << listePlats[i] << endl;
  	}
 }
-Plat& Plat::operator+=(const Plat& plat){
-	return listePlats.pushback(&plat);
-}
 
 Menu& Menu::operator=(const Menu& menu){
 	if( thus != &menu){
@@ -189,4 +186,7 @@ Menu& Menu::operator=(const Menu& menu){
 	return *this;
 
 }
-//page 603 constructeur par copie in Big C++
+
+Menu& Menu::operator+=(const Plat& plat){
+	return listePlats.push_back(new Plat(plat));
+}
