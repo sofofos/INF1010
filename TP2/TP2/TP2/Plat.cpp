@@ -1,7 +1,9 @@
 /*
-* Titre : Plat.cpp - Travail Pratique #2
+* Titre : Menu.cpp - Travail Pratique #2
 * Date : 18 Janvier 2019
 * Auteur : Allan BEDDOUK
+* Modifie par: Sofia Alvarez (1894026) et Justin de Meulemeester ( )
+* Date: 08 fevrier 2019
 */
 
 #include "Plat.h"
@@ -41,7 +43,7 @@ void Plat::setPrix(double prix) {
 }
 
 
-//Surcharges d'opérateur
+//Surcharges d'opï¿½rateur
 
 ostream& operator<<(ostream& out, const Plat& plat) {
 	out << plat.nom_ << " - " << plat.prix_ << " $ (" << plat.cout_ << "$ pour le restaurant)" << endl;

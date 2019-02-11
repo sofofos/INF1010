@@ -1,4 +1,6 @@
-/*
+
+
+ /*
 * Titre : Restaurant.cpp - Travail Pratique #2
 * Date : 18 Janvier 2019
 * Auteur : Allan BEDDOUK
@@ -85,7 +87,9 @@ void Restaurant::commanderPlat(const string& nom, int idTable) {
 			case Soir :
 				plat = menuSoir_->trouverPlat(nom);
 				break;
-			}
+
+
+		 	}
 		}
 	}
 	if (plat != nullptr && tables_[index]->estOccupee()) {
@@ -93,6 +97,8 @@ void Restaurant::commanderPlat(const string& nom, int idTable) {
 	}
 	else cout << "Erreur : table non occupee ou plat introuvable" << endl;
 }
+
+
 
 void Restaurant::lireTable(const string& fichier) {
 	ifstream file(fichier, ios::in);
@@ -115,6 +121,7 @@ void Restaurant::lireTable(const string& fichier) {
 					for (int i = 0; i < ligne.size(); i++) {
 						if (ligne[i] == ' ') {
 							curseur = i;
+
 							break;
 						}
 						idString += ligne[i];
@@ -134,6 +141,7 @@ void Restaurant::lireTable(const string& fichier) {
 		file.close();
 	}
 }
+
 
 void Restaurant::ajouterTable(int id, int nbPlaces) {
 	tables_.push_back(new Table(id, nbPlaces));
@@ -158,7 +166,7 @@ void Restaurant::placerClients(int nbClients) {
 
 
 
-//Surcharge d'opérateurs
+//Surcharge d'opï¿½rateurs
 
 ostream& operator<<(ostream& out, const Restaurant& restaurant) {
 	out << "Le restaurant " << *(restaurant.nom_);

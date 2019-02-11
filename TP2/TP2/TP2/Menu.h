@@ -1,7 +1,9 @@
 /*
-* Titre : Menu.h - Travail Pratique #2
+* Titre : Menu.cpp - Travail Pratique #2
 * Date : 18 Janvier 2019
 * Auteur : Allan BEDDOUK
+* Modifie par: Sofia Alvarez (1894026) et Justin de Meulemeester ( )
+* Date: 08 fevrier 2019
 */
 
 #ifndef MENU_H

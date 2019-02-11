@@ -2,6 +2,8 @@
 * Titre : Menu.cpp - Travail Pratique #2
 * Date : 18 Janvier 2019
 * Auteur : Allan BEDDOUK
+* Modifie par: Sofia Alvarez (1894026) et Justin de Meulemeester ( )
+* Date: 08 fevrier 2019
 */
 
 #include "Menu.h"
@@ -52,20 +54,6 @@ int Menu::getNbPlats() const {
 }
 
 //autres methodes
-
-void Menu::afficher() const {
-
-	for (int i = 0; i < nbPlats_; i++) {
-		cout << "\t";
-		listePlats[i]->afficher();
-
-	}
-}
-
-// void Menu::ajouterPlat(const Plat &plat) {
-// 	// A MODIFIER //DONE
-// 	listePlats.pushback(&plat);
-// }
 
 
 bool Menu::lireMenu(const string& fichier) {
@@ -188,5 +176,17 @@ friend ostream& operator<<(ostream& out, const Menu& menu){
 Plat& Plat::operator+=(const Plat& plat){
 	return listePlats.pushback(&plat);
 }
-Menu& Menu::operator=(const Menu& menu){}
+
+Menu& Menu::operator=(const Menu& menu){
+	if( thus != &menu){
+		for(int i = 0; 0 <listePlats.size();i++){
+			delete listePlats[i];
+			listePlats[i] = nullptr;
+		}
+		type_ = menu.type;
+		listePlats = menu.listePlats;
+	}
+	return *this;
+
+}
 //page 603 constructeur par copie in Big C++

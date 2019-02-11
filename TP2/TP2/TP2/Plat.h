@@ -1,7 +1,9 @@
 /*
-* Titre : Plat.h - Travail Pratique #2
+* Titre : Menu.cpp - Travail Pratique #2
 * Date : 18 Janvier 2019
 * Auteur : Allan BEDDOUK
+* Modifie par: Sofia Alvarez (1894026) et Justin de Meulemeester ( )
+* Date: 08 fevrier 2019
 */
 
 #ifndef PLAT_H
@@ -27,7 +29,7 @@ public:
 	void setNom(string nom);
 	void setPrix(double prix);
 
-	///Surcharges d'opérateurs
+	///Surcharges d'opï¿½rateurs
 	friend ostream& operator<<(ostream& out, const Plat& plat);
 	friend bool operator<(const Plat& plat1, const Plat& plat2);
 
