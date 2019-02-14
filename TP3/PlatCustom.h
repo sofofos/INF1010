@@ -1,6 +1,6 @@
 /*
 * Titre : PlatCustom.h - Travail Pratique #2
-* Date : 11 Février 2019
+* Date : 11 Fï¿½vrier 2019
 * Auteur : Fatou S. MOUNZEO
 */
 
@@ -20,17 +20,17 @@ public:
 	// constructeur
 	PlatCustom(string nom, double prix , double cout,int nbIngredients );
 
-	//getters 
+	//getters
 	int getNbIngredients() const;
 	double getSupplement()const;
 
-	//setters 
+	//setters
 	void setNbIngredients(int nIngredients);
 
 
 
 
-	//methodes en plus 
+	//methodes en plus
 
 	friend ostream& operator<<(ostream& os, const PlatCustom& plat); ///
 

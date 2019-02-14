@@ -6,42 +6,42 @@
 
 #include "Plat.h"
 
-//constructeur 
-
+//constructeur
+using namespace std;
 
 Plat::Plat(string nom , double prix , double cout){
 	nom_ = nom;
-	prix_ = prix; 
-	cout_ = cout; 
+	prix_ = prix;
+	cout_ = cout;
 	type_ = Regulier;
 }
-//getters 
+//getters
 
 string Plat::getNom() const {
-	return nom_; 
+	return nom_;
 }
 
 double Plat::getPrix() const {
-	return prix_; 
+	return prix_;
 }
 
 double Plat::getCout() const {
-	return cout_; 
+	return cout_;
 }
 TypePlat Plat::getType() const
 {
 	return type_;
 }
-//setters 
+//setters
 void Plat::setNom(string nom) {
-	nom_ = nom; 
+	nom_ = nom;
 }
 
 void Plat::setPrix(double prix) {
-	prix_ = prix; 
+	prix_ = prix;
 }
 
-bool Plat::operator<(const Plat& plat) const 
+bool Plat::operator<(const Plat& plat) const
 {
 	return this->prix_ < plat.prix_;
 }
