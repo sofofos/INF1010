@@ -1,30 +1,34 @@
 /*
 * Titre : Table.cpp - Travail Pratique #3
-* Date : 11 Février 2019
+* Date : 11 Fï¿½vrier 2019
 * Auteur :Fatou S. MOUNZEO
 */
 
 #include "Table.h"
 
 //constructeurs
-Table::Table() {
+Table::Table()
+{
 	id_ = -1;
 	nbPlaces_ = 1;
 	nbClientsATable_ = 0;
 }
 
-Table::Table(int id, int nbPlaces) {
+Table::Table(int id, int nbPlaces)
+{
 	id_ = id;
 	nbPlaces_ = nbPlaces;
 	nbClientsATable_ = 0;
 }
 
 //getters
-int Table::getId() const {
+int Table::getId() const
+{
 	return id_;
 }
 
-int Table::getNbPlaces() const {
+int Table::getNbPlaces() const
+{
 	return nbPlaces_;
 }
 
@@ -33,7 +37,8 @@ bool Table::estOccupee() const
 	return nbClientsATable_!=0;
 }
 
-bool Table::estPleine() const {
+bool Table::estPleine() const
+{
 	return nbPlaces_ == 0;
 }
 
@@ -41,15 +46,31 @@ int Table::getNbClientsATable() const
 {
 	return nbClientsATable_;
 }
+
 vector<Plat*> Table::getCommande() const
 {
 	return commande_;
 }
 
+Client* getClientPrincipal() const
+{
+	return *clientPrincipal_;
+}
+double getChiffreAffaire() const{
+	double chiffre = 0;
+	for (int i = 0; i < commande_.size(); i++) {
+		chiffre += (commande_[i]->getPrix() - commande_[i]->getCout());  // a modifier
+	}
+	return chiffre;
+}
 
 //setters
 void Table::setId(int id) {
 	id_ = id;
+}
+
+void setClientPrincipal(Client* clientPrincipal){
+	clientPrincipal = clientPrincipal_;
 }
 
 
@@ -72,9 +93,9 @@ void Table::commander(Plat* plat) {
 double Table::getChiffreAffaire() const {
 	///TODO
 	///Modifier pour que le chiffre d'Affaire prenne en compte le type de plat
-	///voir Énoncé
+	///voir ï¿½noncï¿½
 	double chiffre = 0;
-	for (unsigned i = 0; i < commande_.size(); ++i) 
+	for (unsigned i = 0; i < commande_.size(); ++i)
 			chiffre += commande_[i]->getPrix() - commande_[i]->getCout();
 	return chiffre;
 }

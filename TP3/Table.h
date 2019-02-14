@@ -23,21 +23,21 @@ public:
 	int getId() const;
 	int getNbPlaces() const;
 	bool estOccupee() const;
-	bool estPleine() const; 
-	int getNbClientsATable() const; 
+	bool estPleine() const;
+	int getNbClientsATable() const;
 	vector<Plat*> getCommande() const;
-	///TODO
-	Client* getCliengtPrincipal() const; 
-	///TODO
+	///TODO:DONE
+	Client* getClientPrincipal() const;
+	///TODO: DONE
 	double getChiffreAffaire() const;/// A Modifier
 
 
 	//setters
-	void libererTable(); 
+	void libererTable();
 	void placerClients(int nbClients);
 	void setId(int id);
-	///TODO
-	void setClientPrincipal(Client* clientPrincipal); 
+	///TODO:DONE
+	void setClientPrincipal(Client* clientPrincipal);
 
 	//autres methodes
 	void commander(Plat* plat);
@@ -50,7 +50,7 @@ private :
 	vector<Plat*> commande_;
 	int id_;
 	int nbPlaces_;
-	int nbClientsATable_; 
+	int nbClientsATable_;
 	///Nouvel attribut
 	Client* clientPrincipal_;
 	///
