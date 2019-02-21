@@ -1,8 +1,8 @@
-/*
+    /*
 * Titre : Table.cpp - Travail Pratique #3
 * Date : 11 F�vrier 2019
 * Auteur :Fatou S. MOUNZEO
-* Modifier par: Sofia Alvarez (1894026) & Justin de Meulemeester(######)
+* Modifié par: Sofia Alvarez (1894026) & Justin de Meulemeester(######)
 */
 
 #include "PlatBio.h"
@@ -27,4 +27,3 @@ ostream& operator<<(ostream& os, const PlatBio& plat){
         << plat.ecoTaxe_ << "$" << endl;
     return os;
 }
-    

@@ -4,8 +4,7 @@
 * Auteur : Fatou S. MOUNZEO
 */
 
-#ifndef PLAT_BIO_H
-#define PLAT_BIO_H
+
 
 #include <string>
 #include <iostream>
@@ -13,17 +12,16 @@
 
 using namespace std;
 
-class PlatBio: public Plat  {
+class PlatBio: public Plat {
 public:
 	// constructeurs
-	PlatBio(double ecotaxe = 0);
+	PlatBio(string nom = "inconnu", double prix = 0, double cout = 0,double ecotaxe = 0);
 
 	//getters
 	double getEcoTaxe() const;
 
 	//setters
 	void setEcoTaxe(double ecoTaxe);
-
 
 	//methodes en plus
 
@@ -32,5 +30,3 @@ public:
 private:
 	double ecoTaxe_;
 };
-
-#endif // !PLAT_BIO_H

@@ -14,7 +14,7 @@ using namespace std;
 
 enum TypePlat { Regulier, Bio, Custom };
 
-class Plat {
+class Plat  {
 public:
 	// constructeurs
 	//Plat();

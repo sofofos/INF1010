@@ -4,11 +4,12 @@
 * Auteur : Fatou S. Mounzeo
 */
 
-#ifndef TABLE_H
-#define TABLE_H
+// #ifndef TABLE_H
+// #define TABLE_H
 
 #include "Menu.h"
 #include "PlatCustom.h"
+#include "PlatBio.h"
 #include "ClientPrestige.h"
 #include <vector>
 
@@ -26,9 +27,9 @@ public:
 	bool estPleine() const;
 	int getNbClientsATable() const;
 	vector<Plat*> getCommande() const;
-	///TODO:DONE
+	///TODO:DONE:Verifie
 	Client* getClientPrincipal() const;
-	///TODO: DONE
+	///TODO: DONE/verifie
 	double getChiffreAffaire() const;/// A Modifier
 
 
@@ -55,4 +56,5 @@ private :
 	Client* clientPrincipal_;
 	///
 };
-#endif // !TABLE_H
+
+// #endif //!TABLE_H
