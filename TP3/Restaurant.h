@@ -18,15 +18,15 @@ class Restaurant {
 public:
 	//constructeurs
 	Restaurant();
-	Restaurant(const string& fichier, const string& nom,  TypeMenu moment);
-	Restaurant(const Restaurant& restau); 
+	Restaurant(const string& fichier, const string& nom, TypeMenu moment);
+	Restaurant(const Restaurant& restau);
 
 	//destructeur
 	~Restaurant();
 
 	//setters
 	void setMoment(TypeMenu moment);
-	void setNom(const string& nom); 
+	void setNom(const string& nom);
 
 	//getters
 	string getNom() const;
@@ -37,27 +37,22 @@ public:
 	void lireTable(const string& fichier);
 	void lireAdresses(const string& fichier);
 
-	Restaurant& operator+=(Table* table); 
-	///TODO
-	void libererTable(int id); /// A Modifier
-	///TODO 
-	void commanderPlat(const string& nom, int idTable, TypePlat type= Regulier,int nbIngredients = 0); ///A modifier
-	bool operator < (const Restaurant& restau) const ;
-	Restaurant& operator = (const Restaurant& restau); 
-	///TODO 
-	void placerClients(int nbClients);///A Modifier
-	///TODO
+	Restaurant& operator+=(Table* table);
+
+	void libererTable(int id);
+	void commanderPlat(const string& nom, int idTable, TypePlat type = Regulier, int nbIngredients = 0);
+	bool operator < (const Restaurant& restau) const;
+	Restaurant& operator = (const Restaurant& restau);
+	void placerClients(Client* client);
 	void livrerClient(Client * client, vector<string>nomPlats);
-	///TODO
 	double calculerReduction(Client* client, double montant, bool livraison);
-	//TODO
-	friend ostream& operator<<(ostream& os, const Restaurant& restau); 
+	friend ostream& operator<<(ostream& os, const Restaurant& restau);
 
 
 
 
 private:
-	string* nom_;
+	string * nom_;
 
 	double chiffreAffaire_;
 	TypeMenu momentJournee_;
@@ -71,7 +66,7 @@ private:
 	vector<Table*> tables_;
 
 	//Tarif des trois zones de livraison nouvel attribut
-	double fraisTransport_[NB_ZONES_LIVR]; 
+	double fraisTransport_[NB_ZONES_LIVR];
 
 
 };
