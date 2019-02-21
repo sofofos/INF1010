@@ -27,3 +27,4 @@ ostream& operator<<(ostream& os, const PlatBio& plat){
         << plat.ecoTaxe_ << "$" << endl;
     return os;
 }
+    
