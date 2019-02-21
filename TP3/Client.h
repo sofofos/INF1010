@@ -8,22 +8,22 @@
 
 #include <string>
 #include <iostream>
+using namespace std;
 
-enum StatutClient { Occasionnel,Fidele,Prestige };
+enum StatutClient { Occasionnel, Fidele, Prestige };
 
-class Client{
+class Client {
 public:
 	Client();
-	Client(string nom,string prenom,int tailleGroupe);
-	~Client();
+	Client(string nom, string prenom, int tailleGroupe);
 
-// Accesseurs
-	StatutClient getStatut();
-	int getTailleGroupe();
-	string getNom();
-	string getPrenom();
-	
-//Autes méthodes
+	// Accesseurs
+	StatutClient getStatut() const;
+	int getTailleGroupe() const;
+	string getNom() const;
+	string getPrenom() const;
+
+	//Autes méthodes
 
 	friend ostream & operator<<(ostream & os, const Client& client);
 private:
