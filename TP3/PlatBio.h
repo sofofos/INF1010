@@ -16,15 +16,13 @@ using namespace std;
 class PlatBio: public Plat  {
 public:
 	// constructeurs
-	PlatBio(string nom = "inconnu", double prix = 0, double cout = 0,double ecotaxe = 0);
+	PlatBio(double ecotaxe = 0);
 
 	//getters
 	double getEcoTaxe() const;
 
 	//setters
 	void setEcoTaxe(double ecoTaxe);
-
-
 
 
 	//methodes en plus

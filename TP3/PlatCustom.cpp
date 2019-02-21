@@ -1,17 +1,30 @@
 #include "PlatCustom.h"
 
-PlatCustom::PlatCustom(string nom, double prix , double cout,int nbIngredients ): Plat(nom, prix, cout, nbIngredients){}
+
+PlatCustom::PlatCustom(string nom, double prix , double cout,int nbIngredients ): Plat(nom, prix, cout), nbIngredients_(nbIngredients){
+
+    supplement_ = calculerSupplement();
+    type_ = Custom;
+
+}
 
 int PlatCustom::getNbIngredients() const{
     return nbIngredients_;
 }
+
 double PlatCustom::getSupplement() const{
     return supplement_;
 }
-double PlatCustom::calculerSupplement() const{
-    prix_ += supplement_;
+
+void PlatCustom::setNbIngredients( int nbIngredients){
+    nbIngredients_ = nbIngredients;
 }
-friend ostream& operator<<(ostream& os, const PlatCustom& plat){
-    os << plat.nom_ << " - " << plat.prix_ << " $ (" << plat.cout_ << "$ pour le restaurant)" << plat.nbIngredients << "nombre d'ingredients " <<  plat.getSupplement() << "supplement au prix" << endl;
+
+double PlatCustom::calculerSupplement() const{
+    return (FRAIS_CUSTOMISATION * nbIngredients_);
+}
+
+ostream& operator<<(ostream& os, const PlatCustom& plat){
+    os << plat << " contient" << plat.nbIngredients_ << "pour un supplement de: " << plat.supplement_ << "$ "  << endl;
 	return os;
 }
