@@ -1,108 +1,102 @@
 /*
 * Titre : Menu.cpp - Travail Pratique #3
-* Date : 11 Février 2019
+* Date : 11 Fï¿½vrier 2019
 * Auteur : Fatou S Mounzeo
 */
 
 #include "Menu.h"
 
-//constructeurs 
+//constructeurs
 
 Menu::Menu() {
-	type_ = Matin; 
+	type_ = Matin;
 }
 
 Menu::Menu(string fichier, TypeMenu type) {
-	type_ = type; 
+	type_ = type;
 
 	//lecture du fichier -- creation du menu
-	lireMenu(fichier); 
+	lireMenu(fichier);
 }
 
-Menu::Menu(const Menu & menu): type_(menu.type_)
-{
-	///TODO 
-	///Modifier
+Menu::Menu(const Menu & menu): type_(menu.type_){
 	for (unsigned i = 0; i < menu.listePlats_.size(); ++i)
-	{			listePlats_.push_back(new Plat(*menu.listePlats_[i]));
-
+	{
+		switch(menu.listePlats_[i]->getType()){
+			case Bio:
+			listePlats_.push_back(static_cast<PlatBio*>(menu.listePlats_[i]));
+			break;
+			case Regulier:
+			listePlats_.push_back(new Plat(*menu.listePlats_[i]));
+			break;
+		}
 	}
 }
 
+//Destructeur de Menu
+Menu::~Menu(){
+	for(unsigned i=0; i <listePlats_.size(); i++){
+		delete listePlats_[i];
+	}
+}
 
 //getters
-
-vector<Plat*> Menu::getListePlats() const
-{
+vector<Plat*> Menu::getListePlats() const{
 	return listePlats_;
 }
 
-//autres methodes 
-
-
-ostream& operator<<(ostream& os, const Menu& menu)
-{
-	for (unsigned i = 0; i < menu.listePlats_.size(); ++i) {
-		
-		if(menu.listePlats_[i]->getType()==Regulier)
-			os << "\t" << *menu.listePlats_[i];
-
+//autres methodes
+Plat* Menu::trouverPlat(const string& nom) const {
+	for (int i = 0; i < listePlats_.size(); ++i) {
+		if (listePlats_[i]->getNom() == nom)
+			return listePlats_[i];
 	}
-
-	return os;
+	return nullptr;
 }
+Plat * Menu::trouverPlatMoinsCher() const{
+	Plat minimum(*listePlats_[0]);
+	int found = -1;
 
-
-
-Menu& Menu::operator+=(const Plat& plat) {
-	listePlats_.push_back(new Plat(plat));
-	return *this;
-}
-
-
-Menu & Menu::operator=(const Menu & menu)
-{
-	///TODO
-	/// A Modifier
-	if (this != &menu)
+	for (unsigned i = 0; i < listePlats_.size(); ++i)
 	{
-		this->type_ = menu.type_;
-		listePlats_.clear();
-
-		for (unsigned i = 0; i < menu.listePlats_.size(); ++i)
-			listePlats_.push_back(new Plat(*menu.listePlats_[i]));
+		if (*listePlats_[i] < minimum)
+		{
+			minimum = *listePlats_[i];
+			found = i;
+		}
 	}
-	return *this;
-}
 
+	return listePlats_[found];
+
+}
 
 void Menu::lireMenu(const string& fichier) {
-	ifstream file(fichier, ios::in); 
+	ifstream file(fichier, ios::in);
 
 	if (!file) {
-		cout << "ERREUR : le fichier n'a pas pu etre ouvert" << endl; 
+		cout << "ERREUR : le fichier n'a pas pu etre ouvert" << endl;
 	}
 	else {
-		string type; 
+		string type;
 		switch (type_) {
 		case Matin :
-			type = "-MATIN"; 
-			break; 
-		case Midi : 
+			type = "-MATIN";
+			break;
+		case Midi :
 			type = "-MIDI";
 			break;
-		case Soir : 
-			type = "-SOIR"; 
+		case Soir :
+			type = "-SOIR";
 			break;
 		}
-		string ligne; 
+		string ligne;
 
-		string nom; 
-		
+		string nom;
+
 		string prixString;
-		double prix; 
+		double prix;
 
-		string coutString; 
+		string coutString;
 		double cout;
 
 		string typeString;
@@ -114,23 +108,23 @@ void Menu::lireMenu(const string& fichier) {
 
 		// lecture
 		while (!file.eof()) {
-			std::getline(file, ligne); 
+			std::getline(file, ligne);
 			//trouver le bon type de menu (section)
-			if (ligne == type){ 
-				//commencer a lire -- s'arrete si fin du fichier ou encore si on arrive a une nouvelle section du menu 
+			if (ligne == type){
+				//commencer a lire -- s'arrete si fin du fichier ou encore si on arrive a une nouvelle section du menu
 				std::getline(file, ligne);
-				int curseur; 
+				int curseur;
 				while (ligne[0] != '-' && !file.eof()) {
-					//trouver le nom 
+					//trouver le nom
 					for (int i = 0; i < int(ligne.size()); i++) {
 						if (ligne[i] == ' ') {
 							curseur = i;
 							break;
 						}
-						nom += ligne[i]; 
+						nom += ligne[i];
 					}
 
-					//trouver le type 
+					//trouver le type
 					for (int i = curseur + 1; i < int(ligne.size()); i++) {
 						if (ligne[i] == ' ') {
 							curseur = i;
@@ -142,18 +136,18 @@ void Menu::lireMenu(const string& fichier) {
 
 					typePlat = stoi(typeString);
 
-					//trouver le prix 
+					//trouver le prix
 
 					for (int i = curseur + 1; i < int(ligne.size()); i++) {
 						if (ligne[i] == ' ') {
-							curseur = i; 
-							break; 
+							curseur = i;
+							break;
 						}
-						prixString += ligne[i]; 
-						
+						prixString += ligne[i];
+
 					}
-					//passer le prixString en double --- indice dans l'enonce 
-					prix = stof(prixString.c_str()); 
+					//passer le prixString en double --- indice dans l'enonce
+					prix = stof(prixString.c_str());
 
 					for (int i = curseur + 1; i < int(ligne.size()); i++) {
 						if (ligne[i] == ' ') {
@@ -163,10 +157,10 @@ void Menu::lireMenu(const string& fichier) {
 
 						}
 
-						coutString += ligne[i]; 
+						coutString += ligne[i];
 					}
 
-					cout = stod(coutString.c_str()); 
+					cout = stod(coutString.c_str());
 
 					//lire le taux si plat bio
 
@@ -184,9 +178,9 @@ void Menu::lireMenu(const string& fichier) {
 						*this += Plat(nom, prix, cout);
 					}
 
-					nom = ""; 
-					prixString = ""; 
-					coutString = ""; 
+					nom = "";
+					prixString = "";
+					coutString = "";
 					typeString = "";
 					ecotaxeString ="";
 
@@ -195,32 +189,49 @@ void Menu::lireMenu(const string& fichier) {
 			}
 		}
 
-		file.close(); 
+		file.close();
 	}
 }
 
-Plat * Menu::trouverPlatMoinsCher() const
-{
-	Plat minimum(*listePlats_[0]);
-	int found = -1;
+//Surcharge d'operateurs
+Menu & Menu::operator=(const Menu & menu){
+	if (this != &menu){
+		this->type_ = menu.type_;
+		listePlats_.clear();
 
-	for (unsigned i = 0; i < listePlats_.size(); ++i)
-	{
-		if (*listePlats_[i] < minimum)
-		{
-			minimum = *listePlats_[i];
-			found = i;
+		for (unsigned i = 0; i < menu.listePlats_.size(); ++i){
+			if (menu.listePlats_[i]->getType() == Regulier){
+				listePlats_.push_back(new Plat(*menu.listePlats_[i]));
+			}
+			if (menu.listePlats_[i]->getType() == Bio) {
+				listePlats_.push_back(static_cast<PlatBio*>(menu.listePlats_[i]));
+			}
 		}
 	}
-
-	return listePlats_[found];
-
+	return *this;
 }
 
-Plat* Menu::trouverPlat(const string& nom) const {
-	for (int i = 0; i < listePlats_.size(); ++i) {
-		if (listePlats_[i]->getNom() == nom)
-			return listePlats_[i]; 
+Menu& Menu::operator+=(const Plat& plat) {
+	listePlats_.push_back(new Plat(plat));
+	return *this;
+}
+
+Menu& Menu::operator+=(const PlatBio& plat) {
+	PlatBio* platBio = new PlatBio(plat);
+	listePlats_.push_back(static_cast<Plat*>(platBio));
+	return *this;
+}
+
+ostream& operator<<(ostream& os, const Menu& menu){
+	for (unsigned i = 0; i < menu.listePlats_.size(); ++i) {
+		if(menu.listePlats_[i]->getType()==Regulier){
+			os << "\t" << *menu.listePlats_[i];
+		}
+		if(menu.listePlats_[i]->getType()==Bio){
+			PlatBio* plat;
+			plat = static_cast<PlatBio*>(menu.listePlats_[i]);
+			os << "\t" << *plat;
+		}
 	}
-	return nullptr; 
+	return os;
 }
