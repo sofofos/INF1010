@@ -230,21 +230,24 @@ Restaurant& Restaurant::operator+=(Table* table) {
 
 void Restaurant::placerClients(Client* client) {
 
+	int indexTable = -1;
 	int minimum = 100;
 	int nbClients = client->getTailleGroupe();
 
 
 
 	for (unsigned i = 0; i < tables_.size(); i++) {
-		if (i == -1) {
-			cout << "Erreur : il n'y a plus/pas de table disponible pour les clients. " << endl;
-			break;
+		if(indexTable != 0){
+			if (tables_[i]->getNbPlaces() >= nbClients && !tables_[i]->estOccupee() && tables_[i]->getNbPlaces() < minimum) {
+				tables_[i]->placerClients(nbClients);
+				minimum = tables_[i]->getNbPlaces();
+				tables_[i]->setClientPrincipal(client);
+				indexTable = 0;
+			}
 		}
-		if (tables_[i]->getNbPlaces() >= nbClients && !tables_[i]->estOccupee() && tables_[i]->getNbPlaces() < minimum) {
-			tables_[i]->placerClients(nbClients);
-			minimum = tables_[i]->getNbPlaces();
-			tables_[i]->setClientPrincipal(client);
-		}
+	}
+	if (indexTable == -1) {
+		cout << "Erreur : il n'y a plus/pas de table disponible pour les clients. " << endl;
 	}
 }
 
