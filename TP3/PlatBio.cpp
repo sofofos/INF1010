@@ -24,6 +24,8 @@ void PlatBio::setEcoTaxe(double ecoTaxe){
 }
 
 ostream& operator<<(ostream& os, const PlatBio& plat){
+
 	os << static_cast<Plat>(plat) << "\tcomprend une taxe ecologique de : " << plat.ecoTaxe_ << "$." << endl;
+
 	return os;
 }
