@@ -13,7 +13,7 @@ Table::Table()
 	id_ = -1;
 	nbPlaces_ = 1;
 	nbClientsATable_ = 0;
-	clientPrincipal_ = new Client;
+	clientPrincipal_ = nullptr;
 }
 
 Table::Table(int id, int nbPlaces)
@@ -21,7 +21,7 @@ Table::Table(int id, int nbPlaces)
 	id_ = id;
 	nbPlaces_ = nbPlaces;
 	nbClientsATable_ = 0;
-	clientPrincipal_ = new Client;
+	clientPrincipal_ = nullptr;
 }
 
 //getters
@@ -111,16 +111,7 @@ ostream& operator<<(ostream& os, const Table& table)
 	if (table.estOccupee())
 	{
 		os << " est occupee. ";
-		switch (table.clientPrincipal_->getStatut()) {
-		case Prestige:
-			os << "Le client principal est :\n" << *(static_cast<ClientPrestige*>(table.clientPrincipal_)) << endl;
-			break;
-		case Fidele:
-			os << "Le client principal est :\n" << *(static_cast<ClientRegulier*>(table.clientPrincipal_)) << endl;
-			break;
-		default:
-			os << "Le client principal est :\n" << *(table.clientPrincipal_) << endl;
-		}
+		os << "Le client principal est :\n" << *(table.clientPrincipal_) << endl;
 
 		if (!table.commande_.empty())
 		{
