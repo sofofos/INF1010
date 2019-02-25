@@ -12,8 +12,6 @@ using namespace std;
 
 int main() {
 
-
-
 	//creation du restaurant 
 	Restaurant poly("polyFood.txt", "PolyFood", Soir); 
 
@@ -31,12 +29,21 @@ int main() {
 	Client * cl5 = new ClientPrestige("Andree", "F", 2,150, Zone2);
 	Client * cl6 = new ClientPrestige("Marie", "C", 1,125, Zone1);
 
+	vector<string> commandeMarie;
+	commandeMarie.push_back("Quesadillas");
+	commandeMarie.push_back("Ratatouille");
+	commandeMarie.push_back("Pancake");
+	commandeMarie.push_back("Pizza");
 
 
 	cout << "\t\t\t\t\tLIVRAISONS" << endl;
 	cout << "--------------------------------------------------------------------------------------------------" << endl;
 
 	//Livrer les clients Marie et Martins
+	poly.livrerClient(cl6, commandeMarie);
+	poly.livrerClient(cl1, commandeMartin);
+
+
 
 	cout << "\t\t\t\t\tPLACEMENT DES CLIENT" << endl;
 	cout << "--------------------------------------------------------------------------------------------------" << endl;
@@ -94,4 +101,5 @@ int main() {
 	delete cl4;
 	delete cl5;
 
+	system("pause");
 }

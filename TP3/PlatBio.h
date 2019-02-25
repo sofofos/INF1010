@@ -4,6 +4,8 @@
 * Auteur : Fatou S. MOUNZEO
 */
 
+#ifndef PLATBIO_H
+#define PLATBIO_H
 
 
 #include <string>
@@ -30,3 +32,4 @@ public:
 private:
 	double ecoTaxe_;
 };
+#endif

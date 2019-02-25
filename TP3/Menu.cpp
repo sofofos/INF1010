@@ -217,21 +217,18 @@ Menu& Menu::operator+=(const Plat& plat) {
 }
 
 Menu& Menu::operator+=(const PlatBio& plat) {
-	PlatBio* platBio = new PlatBio(plat);
-	listePlats_.push_back(static_cast<Plat*>(platBio));
+	listePlats_.push_back(new PlatBio(plat));
 	return *this;
 }
 
 ostream& operator<<(ostream& os, const Menu& menu){
-	for (unsigned i = 0; i < menu.listePlats_.size(); ++i) {
-		if(menu.listePlats_[i]->getType()==Regulier){
-			os << "\t" << *menu.listePlats_[i];
+	for (unsigned i = 0; i < menu.listePlats_.size(); i++)
+		if (menu.listePlats_[i]->getType() == Regulier) {
+			os << *(menu.listePlats_[i]);
 		}
-		if(menu.listePlats_[i]->getType()==Bio){
-			PlatBio* plat;
-			plat = static_cast<PlatBio*>(menu.listePlats_[i]);
-			os << "\t" << *plat;
-		}
-	}
+		else if (menu.listePlats_[i]->getType() == Bio)
+			os << *(static_cast<PlatBio*>(menu.listePlats_[i]));
+		else
+			os << *(static_cast<PlatCustom*>(menu.listePlats_[i]));
 	return os;
 }

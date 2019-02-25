@@ -93,24 +93,6 @@ void Table::setId(int id) {
 }
 
 void Table::setClientPrincipal(Client* clientPrincipal){
-	if(clientPrincipal->getStatut() == Occasionnel){
-		clientPrincipal_ = new Client(clientPrincipal->getNom(),
-		clientPrincipal->getPrenom(), clientPrincipal->getTailleGroupe());
-	}
-
-	if(clientPrincipal->getStatut()== Fidele){
-		ClientRegulier* clientR ;
-		clientR = static_cast<ClientRegulier*>(clientPrincipal);
-
-		clientPrincipal_ = new ClientRegulier( clientR->getNom(), clientR->getPrenom(), clientR->getTailleGroupe(), clientR->getNbPoints() );
-	}
-
-	if(clientPrincipal->getStatut() == Prestige){
-		ClientPrestige* clientP;
-	   clientP = static_cast<ClientPrestige*>(clientPrincipal);
-	   clientPrincipal_ = new ClientPrestige(clientP->getNom(), clientP->getPrenom(),
-		   clientP->getTailleGroupe(), clientP->getNbPoints(),clientP->getAddresseCode());
-	}
 	clientPrincipal_ = clientPrincipal;
 }
 
@@ -129,7 +111,7 @@ ostream& operator<<(ostream& os, const Table& table)
 	if (table.estOccupee())
 	{
 		os << " est occupee. ";
-		os << *(table.getClientPrincipal()) << endl << "\t"; //verifier si deja implemente
+		os << "Le client principal est :\n" << *(table.clientPrincipal_) << endl;
 
 		if (!table.commande_.empty())
 		{
