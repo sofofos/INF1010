@@ -1,9 +1,11 @@
-/*
-* Titre : Restaurant.h - Travail Pratique #1
+﻿/*********************************************************************
+* Titre : Restaurant.h - Travail Pratique #2
 * Date : 11 Fevrier 2019
-* Auteur : Fatou S. Mounzeo
-*/
-
+* Auteur : Fatou S. MOUNZEO
+***********************************************************************
+* Modidié par : Sofia Alvarez(1894026) & Justin de Meulemeester(1897007)
+* Date: 24 Février 2019
+***********************************************************************/
 #ifndef RESTAURANT_H
 #define RESTAURANT_H
 

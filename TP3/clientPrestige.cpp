@@ -1,3 +1,10 @@
+/**********************************************************************
+* Titre : clientPrestige.cpp - Travail Pratique #3
+* Date : 11 Février 2019
+* Auteur : Sofia Alvarez(1894026) & Justin de Meulemeester(1897007)
+* Date: 24 Février 2019
+************************************************************************/
+
 #include "ClientPrestige.h"
 
 //Constructeurs

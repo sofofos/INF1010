@@ -1,8 +1,11 @@
-/*
+/**********************************************************************
 * Titre : Menu.cpp - Travail Pratique #3
-* Date : 11 F�vrier 2019
+* Date : 11 Fevrier 2019
 * Auteur : Fatou S Mounzeo
-*/
+***********************************************************************
+* Modidié par : Sofia Alvarez(1894026) & Justin de Meulemeester(1897007)
+* Date: 24 Février 2019
+************************************************************************/
 
 #include "Menu.h"
 
@@ -47,7 +50,7 @@ vector<Plat*> Menu::getListePlats() const{
 
 //autres methodes
 Plat* Menu::trouverPlat(const string& nom) const {
-	for (int i = 0; i < listePlats_.size(); ++i) {
+	for (unsigned i = 0; i < listePlats_.size(); ++i) {
 		if (listePlats_[i]->getNom() == nom)
 			return listePlats_[i];
 	}

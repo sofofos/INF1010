@@ -1,3 +1,9 @@
+/**********************************************************************
+* Titre : client.cpp - Travail Pratique #3
+* Date : 11 Février 2019
+* Auteur : Sofia Alvarez(1894026) & Justin de Meulemeester(1897007)
+* Date: 24 Février 2019
+************************************************************************/
 #include "Client.h"
 
 //Constructeurs
@@ -35,12 +41,11 @@ string Client::convertirStatutString() const {
 		return "Fidele";
 	case Prestige:
 		return "Prestige";
-	default:
-		break;
+	
 	}
 }
 
 ostream & operator<<(ostream & os, const Client& client) {
-	os << "\t-" << client.prenom_ << " " << client.nom_ << " statut: " << client.convertirStatutString();
+	os << "\t-" << client.prenom_ << " " << client.nom_  << " " << client.prenom_<< " statut: " << client.convertirStatutString();
 	return os;
 }

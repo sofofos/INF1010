@@ -1,9 +1,11 @@
-/*
-* Titre : Table.cpp - Travail Pratique #3
-* Date : 11 F�vrier 2019
+/*********************************************************************
+* Titre : PlatCustom.cpp - Travail Pratique #3
+* Date : 11 Fevrier 2019
 * Auteur :Fatou S. MOUNZEO
-* Modifier par: Sofia Alvarez (1894026) & Justin de Meulemeester(######)
-*/
+***********************************************************************
+* Modidié par : Sofia Alvarez(1894026) & Justin de Meulemeester(1897007)
+* Date: 24 Février 2019
+***********************************************************************/
 
 #include "PlatCustom.h"
 #include "Plat.h"

@@ -1,8 +1,11 @@
-/*
+ï»¿/*********************************************************************
 * Titre : Restaurant.cpp - Travail Pratique #2
-* Date : 11 Février 2019
+* Date : 11 Fevrier 2019
 * Auteur : Fatou S. MOUNZEO
-*/
+***********************************************************************
+* ModidiÃ© par : Sofia Alvarez(1894026) & Justin de Meulemeester(1897007)
+* Date: 24 FÃ©vrier 2019
+***********************************************************************/
 
 #include "Restaurant.h"
 
@@ -237,7 +240,7 @@ void Restaurant::placerClients(Client* client) {
 
 
 	for (unsigned i = 0; i < tables_.size(); i++) {
-		if(indexTable != 0){
+		if (indexTable != 0) {
 			if (tables_[i]->getNbPlaces() >= nbClients && !tables_[i]->estOccupee() && tables_[i]->getNbPlaces() < minimum) {
 				tables_[i]->placerClients(nbClients);
 				minimum = tables_[i]->getNbPlaces();
@@ -253,21 +256,21 @@ void Restaurant::placerClients(Client* client) {
 
 void Restaurant::livrerClient(Client * client, vector<string> commande) {
 	int idLivraison = tables_[INDEX_TABLE_LIVRAISON]->getId();
-	if (client->getStatut() == Prestige) {						///vérifie que le client a droit aux livraisons
+	if (client->getStatut() == Prestige) {						///vï¿½rifie que le client a droit aux livraisons
 		cout << "Livraison en cours ..." << endl << endl;
 		tables_[INDEX_TABLE_LIVRAISON]->placerClients(1);
 		tables_[INDEX_TABLE_LIVRAISON]->setClientPrincipal(client); ///Si oui lui assigner la table des livraisons 
 		for (unsigned i = 0; i < commande.size(); i++) {
 			commanderPlat(commande[i], idLivraison);	///Effectuer la commande
 		}
-		
+
 		cout << "Statut de la table de livraison (table numero " << idLivraison << ") :" << endl
 			<< *(tables_[INDEX_TABLE_LIVRAISON])
 			<< "Livraison terminee\n\n";
 		libererTable(idLivraison);
 	}
 	else
-		cout << "Le client " << client->getPrenom() << " n'est pas admissible à la livraison." << endl;
+		cout << "Le client " << client->getPrenom() << " n'est pas admissible ï¿½ la livraison." << endl;
 }
 
 

@@ -1,8 +1,33 @@
-/*
+/**********************************************************************
 * Titre : main.cpp - Travail Pratique #3
 * Date : 11 Février 2019 
 * Auteur : Fatou S. Mounzeo
-*/
+***********************************************************************
+* Modidié par : Sofia Alvarez(1894026) & Justin de Meulemeester(1897007)
+* Date: 24 Février 2019
+************************************************************************/
+
+/***********************************************************************
+QUESTIONS:
+1. Pourquoi à t’on besoin de l’attribut type_ dans la classe Plat?	
+	Que ce serait-il passé s’il n’existait ?
+R:  Car c'est ce qui nous permet de déterminer le type de plat qui serait différent 
+	du plat normal. S'il n'existait pas, on ne saurait pas ou se trouve la distinction 
+	entre la classe de base et les classe derivés et donc on ne pourrait pas convertir les objets. 
+*
+*
+2.Quelle est l’importance du static_cast dans la classe Client et ses classes dérivées?
+R:	static_cast est important car il nous permet de convertir les classes ClientRegulier et 
+	ClientPrestige en Client pour les retrouver au moment appropriés.
+*
+*
+3.(bonus)Pourquoi est-il intéressant de dériver ClientPrestige de ClientRégulier? 
+R: On évite la répetition de code, puisque un clientPrestige "est un" clientRegulier, 
+	donc qui profite des mêmes avantages que clientRegulier, mais avec des méthodes et attributs
+	additionels.
+
+************************************************************************/
+
 
 #include "Restaurant.h"
 #include "ClientPrestige.h"
