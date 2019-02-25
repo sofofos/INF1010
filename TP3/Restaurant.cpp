@@ -237,16 +237,18 @@ void Restaurant::placerClients(Client* client) {
 
 
 	for (unsigned i = 0; i < tables_.size(); i++) {
-		if (tables_[i]->getNbPlaces() >= nbClients && !tables_[i]->estOccupee() && tables_[i]->getNbPlaces() < minimum) {
-			indexTable = i;
-			minimum = tables_[i]->getNbPlaces();
+		if(indexTable != 0){
+			if (tables_[i]->getNbPlaces() >= nbClients && !tables_[i]->estOccupee() && tables_[i]->getNbPlaces() < minimum) {
+				tables_[i]->placerClients(nbClients);
+				minimum = tables_[i]->getNbPlaces();
+				tables_[i]->setClientPrincipal(client);
+				indexTable = 0;
+			}
 		}
 	}
 	if (indexTable == -1) {
 		cout << "Erreur : il n'y a plus/pas de table disponible pour les clients. " << endl;
 	}
-	else
-		tables_[indexTable]->placerClients(nbClients);
 }
 
 void Restaurant::livrerClient(Client * client, vector<string> commande) {
@@ -255,7 +257,7 @@ void Restaurant::livrerClient(Client * client, vector<string> commande) {
 		cout << "Livraison en cours ..." << endl << endl;
 		tables_[INDEX_TABLE_LIVRAISON]->placerClients(1);
 		tables_[INDEX_TABLE_LIVRAISON]->setClientPrincipal(client); ///Si oui lui assigner la table des livraisons 
-		for (int i = 0; i < commande.size(); i++) {
+		for (unsigned i = 0; i < commande.size(); i++) {
 			commanderPlat(commande[i], idLivraison);	///Effectuer la commande
 		}
 		

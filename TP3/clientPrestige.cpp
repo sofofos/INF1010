@@ -24,12 +24,10 @@ string ClientPrestige::getAddressCodeString() const {
 		return "Zone2";
 	case Zone3:
 		return "Zone3";
-	default:
-		break;
 	}
 }
 
 ostream & operator<<(ostream & os, ClientPrestige client) {
-	os << static_cast<Client>(client) << "\t" << "Habite dans la " << client.getAddressCodeString() << endl;
+	os << static_cast<ClientRegulier>(client) << "\t" << "Habite dans la " << client.getAddressCodeString() << endl;
 	return os;
 }
