@@ -30,6 +30,6 @@ string ClientPrestige::getAddressCodeString() const {
 }
 
 ostream & operator<<(ostream & os, ClientPrestige client) {
-	os << static_cast<ClientPrestige>(client) << "\t" << "Habite dans la " << client.getAddressCodeString() << endl;
+	os << static_cast<Client>(client) << "\t" << "Habite dans la " << client.getAddressCodeString() << endl;
 	return os;
 }
