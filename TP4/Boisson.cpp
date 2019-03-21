@@ -1,10 +1,12 @@
-//
-//  Boisson.cpp
-//  intra
-//
-//  Created by Martine Bellaiche on 2019-03-10.
-//  Copyright © 2019 Martine Bellaiche. All rights reserved.
-//
+/*********************************************************************
+*  Boisson.cpp
+*  Created by Martine Bellaiche on 2019-03-10.
+*  Copyright © 2019 Martine Bellaiche. All rights reserved.
+**********************************************************************
+* Modifié par : Sofia Alvarez(1894026) & Justin de Meulemeester(1897007)
+* Date: 21 Mars 2019
+*********************************************************************/
+
 
 #include "Boisson.h"
 // TODO

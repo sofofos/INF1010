@@ -1,8 +1,10 @@
-/*
+/*********************************************************************
 * Date : 25 février 2019
 * Auteur : AbdeB
-*/
-
+**********************************************************************
+* Modifié par : Sofia Alvarez(1894026) & Justin de Meulemeester(1897007)
+* Date: 21 Mars 2019
+*********************************************************************/
 #include "Menu.h"
 #include "LectureFichierEnSections.h"
 #include <cassert>  //? Contient "assert" qui permet de s'assurer qu'une expression est vraie, et terminer le programme avec un message d'erreur en cas contraire.
