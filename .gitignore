@@ -42,7 +42,6 @@ polyFood.txt
 runTest
 tesFile.cpp
 TP1/TP1/Restaurant.cpp
-TP4/TP4/ls
-Debug/TP4/
+TP4/TP4/Debug/
 *.sln
 TP4/TP4/.vcxproj*
