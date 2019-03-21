@@ -5,7 +5,6 @@
 * Modifié par : Sofia Alvarez(1894026) & Justin de Meulemeester(1897007)
 * Date: 21 Mars 2019
 *********************************************************************/
-*/
 
 #include "Client.h"
 
@@ -24,7 +23,7 @@ int Client::getTailleGroupe() const
 	return tailleGroupe_;
 }
 
-string Client::getNom() const
+string Client::getNom() const 
 {
 	return nom_;
 }
@@ -33,14 +32,24 @@ string Client::getPrenom() const
 {
 	return prenom_;
 }
-void Client:: setTable(Table * ta)
-{ tableOccupee_ = ta;}
 
-Table * Client:: getTable() const
-{ return tableOccupee_;}
+Table * Client::getTable() const
+{
+	return tableOccupee_;
+}
+
+void Client:: setTable(Table * ta)
+{ 
+	tableOccupee_ = ta;
+}
+
 
 void Client::afficherClient(ostream & os) const
-{ // TODO
-
+{ // TODO done
+	os << "Le client: " << prenom_ << " " << nom_;
+	if (tableOccupee_ != nullptr) {
+		os << "avec la table" << tableOccupee_ << endl;
+	}
 }
+
 

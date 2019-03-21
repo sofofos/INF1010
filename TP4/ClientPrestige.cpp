@@ -14,8 +14,9 @@ ClientPrestige::ClientPrestige()
 }
 
 ClientPrestige::ClientPrestige(string_view nom, string_view prenom, int tailleGroupe, int nbPoints, ZoneHabitation adresse)
+	:ClientRegulier(nom, prenom, tailleGroupe, nbPoints)
 {
-   //TODO
+   //TODO done
 }
 
 ZoneHabitation ClientPrestige::getAdresseCode() const
@@ -26,6 +27,7 @@ ZoneHabitation ClientPrestige::getAdresseCode() const
 void ClientPrestige::afficherClient(ostream & os) const
 {
         // TODO
+	os << "Le client " << prenom_ << " " << nom_ << "a " << nbPoints_ << " points" << endl;
 }
 string ClientPrestige::getAdressCodeString() const
 {
@@ -48,6 +50,14 @@ string ClientPrestige::getAdressCodeString() const
 	}
 	return zone;
 }
-double ClientPrestige :: getReduction(const Restaurant & res, double montant , bool estLivraison)
-{   //TODO
+double ClientPrestige :: getReduction(const Restaurant& res, double montant , bool estLivraison)
+{   //TODO done
+	double reduction;
+	if (nbPoints_ > SEUIL_DEBUT_REDUCTION) {
+		reduction = (-montant) * TAUX_REDUC_PRESTIGE;
+	}
+	if (nbPoints_ < SEUIL_LIVRAISON_GRATUITE) {
+		reduction += res.getFraisLivraison[adresse_];
+	}
+	return reduction;
 }

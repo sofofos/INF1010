@@ -8,19 +8,25 @@
 #include "ClientOccasionnel.h"
 
 ClientOccasionnel::ClientOccasionnel(string_view nom, string_view prenom, int tailleGroupe)
-{ // TODO
+	:Client(nom, prenom, tailleGroupe)
+{ // TODO done
 }
 ClientOccasionnel::~ClientOccasionnel(){}
 
 int ClientOccasionnel::getNbPoints() const
 {
-        //TODO
+  //TODO done
+	return 0;
 }
 
 void ClientOccasionnel::afficherClient(ostream & os) const
 {
-        //TODO
-
+        //TODO done
+	os	<< "Le client " << prenom_ << " " << nom_ 
+		<< " avec le groupe de: " << tailleGroupe_ << "personnes" << endl;
 }
 double ClientOccasionnel::getReduction(const Restaurant & res, double montant, bool estLivraison)
-{ // TODO}
+{
+	return 0;
+}
+
