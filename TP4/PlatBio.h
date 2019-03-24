@@ -15,16 +15,15 @@ using namespace std;
 class PlatBio: public Plat {
 public:
 	// constructeurs
-        PlatBio(string nom = "inconnu", double prix = 0,
-                double cout = 0, double ecotaxe = 0);//TODO
-        ~ PlatBio();
+    PlatBio(string nom = "inconnu", double prix = 0, double cout = 0, double ecotaxe = 0);//TODO
+    virtual ~ PlatBio();
 	//getters 
 	double getEcoTaxe() const;
 	//setters 
 	void setEcoTaxe(double ecoTaxe);
-        void afficherPlat(ostream& os) const; // TODO
-        double getPrixDeRevient(); //TODO
-        Plat * clone() const; // TODO
+        void afficherPlat(ostream& os) const override; // TODO done
+        double getPrixDeRevient(); //TODO done
+        Plat * clone() const; // TODO done
 protected:
 	double ecoTaxe_;
 

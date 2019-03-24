@@ -11,9 +11,11 @@ class ClientOccasionnel: public Client
 {
 public:
 	ClientOccasionnel(string_view nom, string_view prenom, int tailleGroupe);
-     virtual int getNbPoints() const;// TODO done 
-     virtual void afficherClient(ostream & os) const;// TODO done
-     virtual double getReduction(const Restaurant & res, double montant, bool estLivraison); // TODO done
+	virtual ~ClientOccasionnel();
+
+     virtual int getNbPoints() const override;// TODO done 
+     virtual void afficherClient(ostream & os) const override;// TODO done
+     virtual double getReduction(const Restaurant & res, double montant, bool estLivraison) override; // TODO done
 };
 
 #endif

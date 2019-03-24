@@ -14,16 +14,13 @@ ClientOccasionnel::ClientOccasionnel(string_view nom, string_view prenom, int ta
 ClientOccasionnel::~ClientOccasionnel(){}
 
 int ClientOccasionnel::getNbPoints() const
-{
-  //TODO done
+{	//TODO done
 	return 0;
 }
 
 void ClientOccasionnel::afficherClient(ostream & os) const
-{
-        //TODO done
-	os	<< "Le client " << prenom_ << " " << nom_ 
-		<< " avec le groupe de: " << tailleGroupe_ << "personnes" << endl;
+{	//TODO done
+	Client::afficherClient(os);
 }
 double ClientOccasionnel::getReduction(const Restaurant & res, double montant, bool estLivraison)
 {

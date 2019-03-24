@@ -4,22 +4,21 @@
 #include <string>
 #include <string_view>
 #include <iostream>
+
 #include "Table.h"
-#include "Restaurant.h"
+//#include "Restaurant.h"
 #include "def.h"
 
-using std::string; 
-using std::string_view;
-using std::ostream;  //? On ne devrait normalement pas faire de "using" global dans un .h, mais c'est accepte en INF1010.
+using std::string, std::string_view, std::ostream;  //? On ne devrait normalement pas faire de "using" global dans un .h, mais c'est accepte en INF1010.
 
 class Restaurant;
 class Table;
-class Client
+class Client 
 {
 public:
 	Client();
 	Client(string_view nom, string_view prenom, int tailleGroupe);
-        ~Client(){};
+    virtual ~Client(){};
 
 	//getters
 	int getTailleGroupe() const;
@@ -32,7 +31,7 @@ public:
 
 	//affichage
     virtual int getNbPoints() const =0;
-    virtual void afficherClient(ostream & os) const =0; // TODO
+    virtual void afficherClient(ostream & os) const =0;
     virtual double getReduction(const Restaurant & res, double montant, bool estLivraison) =0;
 
 protected:

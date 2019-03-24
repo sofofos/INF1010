@@ -45,10 +45,13 @@ void Client:: setTable(Table * ta)
 
 
 void Client::afficherClient(ostream & os) const
-{ // TODO done
+{ 
 	os << "Le client: " << prenom_ << " " << nom_;
 	if (tableOccupee_ != nullptr) {
-		os << "avec la table" << tableOccupee_ << endl;
+		os << "occupe la table" << tableOccupee_->getId() << endl;
+	}
+	else{
+		os << "n'occupe pas de place à une table" << endl;
 	}
 }
 
