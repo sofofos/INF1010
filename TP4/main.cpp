@@ -5,6 +5,12 @@
 * Modifié par : Sofia Alvarez(1894026) & Justin de Meulemeester(1897007)
 * Date: 21 Mars 2019
 *********************************************************************/
+/* Réponses à la question 2 :
+
+Une classe abstraite est une classe ayant au moins une fonction membre virtuelle pure.
+Une interface est une classe composée uniquement de fonctions membres virtuelles pures.
+
+*/
 
 #include "Restaurant.h"
 #include "ClientOccasionnel.h"
