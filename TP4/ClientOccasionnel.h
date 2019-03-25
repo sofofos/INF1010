@@ -13,9 +13,9 @@ public:
 	ClientOccasionnel(string_view nom, string_view prenom, int tailleGroupe);
 	virtual ~ClientOccasionnel();
 
-     virtual int getNbPoints() const override;// TODO done 
-     virtual void afficherClient(ostream & os) const override;// TODO done
-     virtual double getReduction(const Restaurant & res, double montant, bool estLivraison) override; // TODO done
+     int getNbPoints() const override;// TODO done 
+     void afficherClient(ostream & os) const override;// TODO done
+     double getReduction(const Restaurant & res, double montant, bool estLivraison) override; // TODO done
 };
 
 #endif

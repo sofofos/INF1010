@@ -21,9 +21,9 @@ void PlatBioVege::afficherPlat(ostream & os) const
 	Vege::afficherVege(os);
 }
 
-Plat * PlatBioVege::clone() const
+Plat* PlatBioVege::clone() const
 { //TODO done
-	Plat* clonePlat = new Plat(Plat::nom_, prix_, cout_);
+	PlatBioVege* clonePlat = new PlatBioVege(Plat::nom_, prix_, cout_,ecoTaxe_,vitamines_,proteines_,mineraux_);
 	return clonePlat;
 }
 

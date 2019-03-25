@@ -18,12 +18,12 @@ class ClientRegulier : public Client
     virtual ~ClientRegulier();
 
 	//Accesseurs
-     int getNbPoints() const ;
+    int getNbPoints() const override ;
 
 	//Autres Methodes
 	void augmenterNbPoints(int bonus);
-    virtual void afficherClient(ostream & os) const; 
-	virtual double getReduction(const Restaurant& res, double montant , bool estLivraison);
+    void afficherClient(ostream & os) const override; 
+	double getReduction(const Restaurant& res, double montant , bool estLivraison) override;
 
 
 protected:

@@ -21,9 +21,9 @@ public:
 	double getEcoTaxe() const;
 	//setters 
 	void setEcoTaxe(double ecoTaxe);
-        void afficherPlat(ostream& os) const override; // TODO done
-        double getPrixDeRevient(); //TODO done
-        Plat * clone() const; // TODO done
+    void afficherPlat(ostream& os) const override; // TODO done
+    double getPrixDeRevient(); //TODO done
+    Plat * clone() const override; // TODO done
 protected:
 	double ecoTaxe_;
 

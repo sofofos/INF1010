@@ -26,9 +26,9 @@ void PlatBio::setEcoTaxe(double ecoTaxe)
 }
 
 //TODO done
-Plat * PlatBio:: clone () const
+Plat* PlatBio:: clone () const
 {
-	Plat* clonePlat = new Plat(nom_, prix_, cout_);
+	PlatBio* clonePlat = new PlatBio(nom_, prix_, cout_, ecoTaxe_);
 	return clonePlat;
 
 }

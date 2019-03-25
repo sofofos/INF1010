@@ -39,6 +39,9 @@ void Vege::setMineraux(double mineraux)
 }
 void Vege::afficherVege(ostream & os) const
 {   //TODO
+	os << "PLAT VEGE " << nom_ << "  vitamines " << vitamines_ << " Proteines " << proteines_ << " Mineraux " <<
+		mineraux_<< endl << "(Apport nutritif de " << calculerApportNutritif() << "mg)" << endl;
 }
+
 
 

@@ -12,14 +12,22 @@
 PlatVege::PlatVege(string nom, double prix, double cout, double vitamines, double proteines, double mineraux)
 	:Plat(nom, prix, cout), Vege(nom, vitamines, proteines, mineraux)
 {
-    //TODO
+	setTaxe();
 
 }
 PlatVege::~ PlatVege(){}
 
+double PlatVege::getTaxe() const {
+	return taxe_;
+}
+
+void PlatVege::setTaxe() {
+	taxe_ = 0.07;
+}
+
 Plat* PlatVege::clone()const
-{ //TODO
-	Plat* clonePlat = new Plat(Plat::nom_, prix_, cout_);
+{ //TODONE
+	PlatVege* clonePlat = new PlatVege(Plat::nom_, prix_, cout_,vitamines_,proteines_,mineraux_);
 	return clonePlat;
 }
 

@@ -9,7 +9,9 @@
 //#include "Restaurant.h"
 #include "def.h"
 
-using std::string, std::string_view, std::ostream;  //? On ne devrait normalement pas faire de "using" global dans un .h, mais c'est accepte en INF1010.
+using std::string;
+using std::string_view;
+using std::ostream;  //? On ne devrait normalement pas faire de "using" global dans un .h, mais c'est accepte en INF1010.
 
 class Restaurant;
 class Table;

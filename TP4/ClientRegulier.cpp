@@ -13,7 +13,7 @@ ClientRegulier::ClientRegulier()
 }
 
 ClientRegulier::ClientRegulier(string_view nom, string_view prenom, int tailleGroupe, int npoints)
-	:Client(nom, prenom, tailleGroupe)
+	:Client(nom, prenom, tailleGroupe), nbPoints_(npoints)
 { 
 }
 ClientRegulier::~ClientRegulier() {}
@@ -33,6 +33,7 @@ void ClientRegulier::augmenterNbPoints(int bonus)
 void ClientRegulier::afficherClient(ostream & os) const
 {
 	Client::afficherClient(os);
+	os << "Il possède " << nbPoints_ << " points." << endl;
 }
 
 double ClientRegulier::getReduction(const Restaurant & res, double montant, bool estLivraison)

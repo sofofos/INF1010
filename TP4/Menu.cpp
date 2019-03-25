@@ -25,7 +25,10 @@ Menu::Menu(string fichier, TypeMenu type) :
 
 Menu::~Menu()
 {
-	//TODO
+	for (int i = 0; i < listePlats_.size(); i++) {
+		delete listePlats_[i];
+		listePlats_[i] = nullptr;
+	}
 }
 
 Plat* Menu::allouerPlat(Plat* plat) {
@@ -35,13 +38,28 @@ Plat* Menu::allouerPlat(Plat* plat) {
 
 Menu::Menu(const Menu & menu) : type_(menu.type_)
 {
-	//TODO
+
+	for (int i = 0; i < menu.listePlats_.size(); i++) {
+		listePlats_.push_back(allouerPlat(menu.listePlats_[i]));
+	}
+
+	for (int i = 0; i < menu.listePlatsVege_.size(); i++) {
+		listePlatsVege_.push_back(menu.listePlatsVege_[i]);
+	}
   
 }
 
 Menu & Menu::operator=(const Menu & menu)
 {
-        //TODO
+	for (int i = 0; i < menu.listePlats_.size(); i++) {
+		listePlats_[i] = allouerPlat(menu.listePlats_[i]);
+	}
+
+	for (int i = 0; i < menu.listePlatsVege_.size(); i++) {
+		listePlatsVege_[i] = menu.listePlatsVege_[i];
+	}
+
+	return *this;
 }
 
 // Getters.
@@ -54,7 +72,14 @@ vector<Plat*> Menu::getListePlats() const
 // Autres methodes.
 
 Menu& Menu::operator+=(owner<Plat*> plat) {
-        //TODO
+       
+	listePlats_.push_back(plat);
+	
+	Vege* platTest = dynamic_cast<Vege*>(plat);
+	if (platTest != nullptr)
+		listePlatsVege_.push_back(platTest);
+
+	return *this;
 }
 
 void Menu::lireMenu(const string& nomFichier) {
@@ -113,5 +138,14 @@ Plat* Menu::lirePlatDe(LectureFichierEnSections& fichier)
 
 ostream& operator<<(ostream& os, const Menu& menu)
 {   
-        //TODO
+	for (int i = 0; i < menu.listePlats_.size(); i++) {
+		menu.listePlats_[i]->afficherPlat(os);
+	}
+	os << endl << "MENU ENTIEREMENT VEGETARIEN" << endl;
+
+	for (int i = 0; i < menu.listePlatsVege_.size(); i++) {
+		menu.listePlatsVege_[i]->afficherVege(os);
+	}
+
+	return os;
 }

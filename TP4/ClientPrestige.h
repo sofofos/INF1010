@@ -19,8 +19,8 @@ public:
 	ZoneHabitation getAdresseCode() const;
 
 	//Autres Fonctions
-    virtual void afficherClient(ostream & os) const;
-    virtual double getReduction(const Restaurant & res, double montant, bool estLivraison); 
+    void afficherClient(ostream & os) const override;
+    double getReduction(const Restaurant & res, double montant, bool estLivraison) override; 
 
 
 private:
