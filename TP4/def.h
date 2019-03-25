@@ -3,8 +3,8 @@
 #include<string_view>
 using namespace std;
 enum class TypeMenu { Matin, Midi, Soir, first_ = Matin, last_ = Soir };
-inline static constexpr string_view nomsDesTypesDeMenu[] = { "Matin", "Midi", "Soir" };
-inline static constexpr string_view entetesDesTypesDeMenu[] = { "-MATIN", "-MIDI", "-SOIR" }; // Pour le format du fichier.
+inline static string_view nomsDesTypesDeMenu[] = { "Matin", "Midi", "Soir" };
+inline static string_view entetesDesTypesDeMenu[] = { "-MATIN", "-MIDI", "-SOIR" }; // Pour le format du fichier.
 enum class ZoneHabitation { Zone1, Zone2, Zone3, first_ = Zone1, last_ = Zone3 };
 enum class TypePlat { Normal = 0, Bio = 1, Vege = 2, BioVege = 3, first_ = Normal, last_ = BioVege };
 const double TAUX_REDUC_REGULIER = 0.1;

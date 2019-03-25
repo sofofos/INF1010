@@ -38,7 +38,7 @@ void ClientRegulier::afficherClient(ostream & os) const
 
 double ClientRegulier::getReduction(const Restaurant & res, double montant, bool estLivraison)
 {
-	double reduction;
+	double reduction = 0;
 	//TODO
 	if (nbPoints_ > SEUIL_DEBUT_REDUCTION) {
 		reduction = (-montant * TAUX_REDUC_REGULIER);

@@ -27,6 +27,7 @@ int main()
 	Menu* menu1 = new Menu(*poly.getMenu(TypeMenu::Matin));
 	cout << "================Exemple de menu===============" << endl;
 	cout << *menu1;
+	
 	///creer plusieurs clients
    	clients.push_back(new ClientOccasionnel("Martin", "b", 1));
 	clients.push_back(new ClientOccasionnel("Amy", "wh", 15));
@@ -62,6 +63,7 @@ int main()
     // afficher le restaurant avec aucun chiffre d'affaire
     cout << poly;
     
+	
     // librer les tables du restaurant
     for ( int i = 0 ; i < clients.size(); i++)
         if (clients[i]->getTable() != nullptr)
@@ -135,5 +137,6 @@ int main()
 	{
 		delete clients[i];
 	}
+	
 	return 0;
 }
