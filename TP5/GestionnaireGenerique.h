@@ -35,7 +35,7 @@ inline C GestionnaireGenerique<T,C>::getConteneur() const {
 
 template<typename T, typename C> //demande
 inline void GestionnaireGenerique<T,C>::ajouter(T t) {
-	conteneur_.insert(conteneur.end(),t);
+	conteneur_.insert(t);
 }
 
 template<typename T, typename C>
