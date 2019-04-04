@@ -13,13 +13,25 @@ using namespace std;
 
 
 class FoncteurPlatMoinsCher
-{ // TODO
-
+{ 
+public:
+	bool operator()(Plat plat1, Plat plat2) {
+		return plat1.getPrix() < plat2.getPrix;
+	}
     
 };
 
 class FoncteurIntervalle
 {
-   // TODO
+public:
+
+	bool operator()(Plat plat) {
+		return plat.getPrix() > borneInf_ && plat.getPrix() < borneSup_;
+
+	}
+
+private:
+	int borneInf_;
+	int borneSup_;
 };
 
