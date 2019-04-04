@@ -8,6 +8,10 @@
 #include "GestionnaireTables.h"
 #include "LectureFichierEnSections.h"
 
+Table* getTable(int id) {
+
+}
+
 void GestionnaireTables::lireTables(const string& nomFichier)
 {
 	LectureFichierEnSections fichier{ nomFichier };
