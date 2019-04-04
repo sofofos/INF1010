@@ -17,11 +17,28 @@ template<typename T, typename C>
 class GestionnaireGenerique
 {
 public:
-	C getConteneur() const; //TODO
-	void ajouter(T t);//TODO
-	int getNombreElements() const;//TODO
+	C getConteneur() const;
+	void ajouter(T t);
+
+	int getNombreElements() const;
 
 protected:
 	C conteneur_;
 };
 
+template<typename T, typename C>
+inline C GestionnaireGenerique<T,C>::getConteneur() const {
+	return conteneur_;
+}
+
+
+
+template<typename T, typename C> //demande
+inline void GestionnaireGenerique<T,C>::ajouter(T t) {
+	conteneur_.insert(conteneur.end(),t);
+}
+
+template<typename T, typename C>
+inline int GestionnaireGenerique<T,C>::getNombreElements() const {
+	return conteneur_.size();
+}
