@@ -38,7 +38,6 @@ TP1/.idea/
 TP1/CMakeLists.txt
 TP1/TP1/CMakeLists.txt
 makeymake
-polyFood.txt
 runTest
 tesFile.cpp
 TP1/TP1/Restaurant.cpp
