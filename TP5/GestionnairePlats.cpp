@@ -34,13 +34,18 @@ Plat* GestionnairePlats::allouerPlat(Plat* plat) { //TODO
 	return unPlat;
 }
 
-Plat* GestionnairePlats::trouverPlatMoinsCher() const {	//TODO
-	min_element(conteneur_.begin(), conteneur_.end(), FoncteurPlatMoinsCher());
-	
+Plat* GestionnairePlats::trouverPlatMoinsCher() const {
+	return (min_element(conteneur_.begin(), conteneur_.end(), FoncteurPlatMoinsCher()))->second;
+
 }
 
 Plat* GestionnairePlats::trouverPlatPlusCher() const { //TODO
 
+	auto p = [](pair<string, Plat*> pair1, pair<string, Plat*> pair2) { //a confirmer
+		return pair1.second->getPrix() < pair2.second->getPrix();
+	};
+
+	return (max_element(conteneur_.begin(), conteneur_.end(), p() ))->second;
 }
 
 Plat* GestionnairePlats::trouverPlat(const string& nom) const { //TODO
