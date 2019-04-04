@@ -35,7 +35,8 @@ Plat* GestionnairePlats::allouerPlat(Plat* plat) { //TODO
 }
 
 Plat* GestionnairePlats::trouverPlatMoinsCher() const {	//TODO
-
+	min_element(conteneur_.begin(), conteneur_.end(), FoncteurPlatMoinsCher());
+	
 }
 
 Plat* GestionnairePlats::trouverPlatPlusCher() const { //TODO

@@ -15,8 +15,8 @@ using namespace std;
 class FoncteurPlatMoinsCher
 { 
 public:
-	bool operator()(Plat plat1, Plat plat2) {
-		return plat1.getPrix() < plat2.getPrix;
+	bool operator()(pair<string, Plat*> pair1, pair<string, Plat*> pair2) {
+		return pair1.second->getPrix() < pair2.second->getPrix();
 	}
     
 };
