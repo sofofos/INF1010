@@ -157,7 +157,7 @@ bool Restaurant::livrerClient(Client* client, const vector<string>& commande)
 		// Placer la commande
 		for (unsigned int i = 0; i < commande.size(); i++)
 			commanderPlat(commande[i], INDEX_TABLE_LIVRAISON);
-		// Liberer la table fictive.
+		// Liberer la table fictive.	
 		libererTable(INDEX_TABLE_LIVRAISON);
 		return true;
 	}
