@@ -17,12 +17,13 @@ GestionnairePlats::GestionnairePlats(const string& nomFichier, TypeMenu type)
 	lirePlats(nomFichier, type);
 }
 
-GestionnairePlats::GestionnairePlats(GestionnairePlats* gestionnaire) { //TODO
-	
+GestionnairePlats::GestionnairePlats(GestionnairePlats* gestionnaire) {
+	type_ = gestionnaire->type_;
+	copy(gestionnaire->conteneur_.begin(), gestionnaire->conteneur_.end(), conteneur_);
 }
 
-GestionnairePlats::~GestionnairePlats() {// TODO
-
+GestionnairePlats::~GestionnairePlats() {
+	conteneur_.clear();
 }
 
 TypeMenu GestionnairePlats::getType() const {
@@ -34,37 +35,29 @@ Plat* GestionnairePlats::allouerPlat(Plat* plat) {
 	return unPlat;
 }
 
-Plat* GestionnairePlats::trouverPlatMoinsCher() const {
+Plat* GestionnairePlats::trouverPlatMoinsCher() const { //Pas certain de l'implementation du foncteur
 	return (min_element(conteneur_.begin(), conteneur_.end(), FoncteurPlatMoinsCher()))->second;
 
 }
 
-Plat* GestionnairePlats::trouverPlatPlusCher() const { //TODO
+Plat* GestionnairePlats::trouverPlatPlusCher() const { //pas certain
 
-	auto p = [](pair<string, Plat*> pair1, pair<string, Plat*> pair2) { //a confirmer
-		return pair1.second->getPrix() < pair2.second->getPrix();
-	};
-
-	return (max_element(conteneur_.begin(), conteneur_.end(), p() ))->second;
+	return (max_element(conteneur_.begin(), conteneur_.end(),
+		[](pair<string, Plat*> a, pair<string, Plat*> b){ return a.second->getPrix() > b.second->getPrix(); }))->second;
 }
 
 Plat* GestionnairePlats::trouverPlat(const string& nom) const {
 	return (find(conteneur_.begin(), conteneur_.end(), nom))->second;
 }
 
-vector<pair<string, Plat*>> GestionnairePlats::getPlatsEntre(double borneInf, double borneSup) {
-	map<string, Plat*>::iterator itrBegin = conteneur_.begin();
-	map<string, Plat*>::iterator itrEnd = conteneur_.begin();
-	
-	for (int i = 0; i < borneInf; i++)
-		itrBegin++;
-	for (int i = 0; i < borneSup; i++)
-		itrEnd++;
+vector<pair<string, Plat*>> GestionnairePlats::getPlatsEntre(double borneInf, double borneSup) { //A implementer avec foncteurs
+	vector<pair<string, Plat*>> plats;
 
-	vector<pair<string, Plat*>> vecteurSortie;
-	copy(itrBegin, itrEnd, vecteurSortie);
-
-	return vecteurSortie;
+	map<string, Plat*>::iterator itr = conteneur_.begin();
+	for (itr; itr != conteneur_.end(); itr++)
+		if (itr->second->getPrix() > borneInf && itr->second->getPrix() < borneSup) {
+			plats.push_back(*itr);
+		}
 
 }
 

@@ -18,11 +18,11 @@ Table* GestionnaireTables::getMeilleureTable(int tailleGroupe) const {
 	set<Table*>::iterator itr = conteneur_.begin();
 	for (itr; itr != conteneur_.end(); itr++) {
 		Table* table = *itr;
-		if (table->getNbPlaces >= tailleGroupe && table->estOccupee() == false) {
+		if (table->getNbPlaces() >= tailleGroupe && table->estOccupee() == false) {
 			if (meilleureTable == nullptr) {
 				meilleureTable = table;
 			}
-			else if (table->getNbPlaces() < table->getNbPlaces) {
+			else if (table->getNbPlaces() < table->getNbPlaces()) {
 				meilleureTable = table;
 			}
 		}
