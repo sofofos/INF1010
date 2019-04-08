@@ -43,17 +43,16 @@ public:
 	string getNom() const;
 	TypeMenu getMoment() const;
     double getChiffreAffaire();
-	GestionnaireTables* getTables() const; // TODO : À implémenter
-	Menu* getMenu(TypeMenu typeMenu) const; // TODO: retourner un GestionnairePlats* a la place
+	GestionnaireTables* getTables(int id) const; // TODO : À implémenter
+	GestionnairePlats* getMenu(TypeMenu typeMenu) const; 
 	double getFraisLivraison(ZoneHabitation zone) const;
-	string getNomTypeMenu(TypeMenu typeMenu);
+	string getNomTypeMenu(TypeMenu typeMenu) const;
 
 	// Autres methodes.
 	void lireAdresses(const string& fichier);
 	void libererTable(int id);
 
-	void lireTables(const string& fichier); // TODO : À retirer, déplcer dans GestionnaitreTables.
-	Restaurant& operator+=(owner<Table*> table); // TODO : À retirer, deplacer dans GestionnaireTables //? Le param�tre est indiqu� "owner" pour montrer que cette m�thode prend possession du pointeur qui lui est pass�, mais owner<Table*> est �quivalent � Table*; voir pointers.h .
+	
 
 	void commanderPlat(string_view nom, int idTable);
 	bool operator <(const Restaurant& restau) const ;
@@ -68,8 +67,10 @@ public:
 	friend ostream& operator<<(ostream& os, const Restaurant& restaurent);
 
 private:
-	Menu* menuActuel() const; // TODO : retourner GestionnairePlats 
-	Table* getTable(int id) const; // TODO : À retirer, utiliser GestionnaireTables
+	GestionnairePlats* menuActuel() const;
+
+
+	
 
 	string nom_;
 	TypeMenu momentJournee_;
@@ -77,13 +78,13 @@ private:
 
 	// TODO : Retirer les Menu et utiliser des GestionnairePlats* à la place.
 	// Differents menus en fonction du moment de la journ�e.
-	owner<Menu*> menuMatin_;  //? "owner" est juste un indicateur que la classe est propri�taire des menus (et devra faire un "delete"), mais owner<Menu*> est �quivalent � Menu*; voir pointers.h .
-	owner<Menu*> menuMidi_;
-	owner<Menu*> menuSoir_;
+	GestionnairePlats* menuMatin_;  //? "owner" est juste un indicateur que la classe est propri�taire des menus (et devra faire un "delete"), mais owner<Menu*> est �quivalent � Menu*; voir pointers.h .
+	GestionnairePlats* menuMidi_;
+	GestionnairePlats* menuSoir_;
 	
 	// Liste des tables.
 	// TODO: Retirer ce vecteur et utiliser un GestionnaireTables à la place.
-	vector<owner<Table*>> tables_;  //? "owner" est juste un indicateur que la classe est propri�taire des tables (et devra faire un "delete"), mais owner<Table*> est �quivalent � Table*; voir pointers.h .
+	GestionnaireTables* tables_;  //? "owner" est juste un indicateur que la classe est propri�taire des tables (et devra faire un "delete"), mais owner<Table*> est �quivalent � Table*; voir pointers.h .
 
 	// Tarif des trois zones de livraison.
 	double fraisLivraison_[NB_ZONES_LIVR]; 
