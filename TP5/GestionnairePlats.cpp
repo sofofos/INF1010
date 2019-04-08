@@ -48,12 +48,23 @@ Plat* GestionnairePlats::trouverPlatPlusCher() const { //TODO
 	return (max_element(conteneur_.begin(), conteneur_.end(), p() ))->second;
 }
 
-Plat* GestionnairePlats::trouverPlat(const string& nom) const { //TODO
+Plat* GestionnairePlats::trouverPlat(const string& nom) const {
 	return (find(conteneur_.begin(), conteneur_.end(), nom))->second;
 }
 
-vector<pair<string, Plat*>> GestionnairePlats::getPlatsEntre(double borneInf, double borneSup) { //TODO
-	conteneur_.begin()++;
+vector<pair<string, Plat*>> GestionnairePlats::getPlatsEntre(double borneInf, double borneSup) {
+	map<string, Plat*>::iterator itrBegin = conteneur_.begin();
+	map<string, Plat*>::iterator itrEnd = conteneur_.begin();
+	
+	for (int i = 0; i < borneInf; i++)
+		itrBegin++;
+	for (int i = 0; i < borneSup; i++)
+		itrEnd++;
+
+	vector<pair<string, Plat*>> vecteurSortie;
+	copy(itrBegin, itrEnd, vecteurSortie);
+
+	return vecteurSortie;
 
 }
 
@@ -95,5 +106,8 @@ pair<string, Plat*> GestionnairePlats::lirePlatDe(LectureFichierEnSections& fich
 }
 
 void GestionnairePlats::afficherPlats(ostream& os) {
-
+	map<string, Plat*>::iterator itr = conteneur_.begin();
+	for (itr; itr != conteneur_.end(); itr++)
+		(itr->second)->afficherPlat(os);
+	
 }
