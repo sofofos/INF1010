@@ -14,20 +14,21 @@ Table* GestionnaireTables::getTable(int id) const{
 }
 
 Table* GestionnaireTables::getMeilleureTable(int tailleGroupe) const {
+	set<Table*>::iterator itr;
+	set<Table*> tableSet = getConteneur();
 	Table* meilleureTable = nullptr;
-	set<Table*>::iterator itr = conteneur_.begin();
-	for (itr; itr != conteneur_.end(); itr++) {
-		Table* table = *itr;
-		if (table->getNbPlaces() >= tailleGroupe && table->estOccupee() == false) {
-			if (meilleureTable == nullptr) {
-				meilleureTable = table;
-			}
-			else if (table->getNbPlaces() < table->getNbPlaces()) {
-				meilleureTable = table;
+
+	for (itr = tableSet.begin(); itr != tableSet.end(); ++itr) {
+		if ((!(*itr)->estOccupee()) && ((*itr)->getId() != ID_TABLE_LIVRAISON)) {
+			int nPlaces = (*itr)->getNbPlaces();
+			if ((nPlaces >= tailleGroupe) && (!meilleureTable || nPlaces < meilleureTable->getNbPlaces())) {
+				meilleureTable = (*itr);
 			}
 		}
 	}
+
 	return meilleureTable;
+
 }
 
 void GestionnaireTables::lireTables(const string& nomFichier)
