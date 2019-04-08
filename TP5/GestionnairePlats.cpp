@@ -11,7 +11,7 @@
 #include "PlatBioVege.h"
 
 
-GestionnairePlats::GestionnairePlats(const string& nomFichier, TypeMenu type) //TODO
+GestionnairePlats::GestionnairePlats(const string& nomFichier, TypeMenu type)
 	:type_(type)
 {
 	lirePlats(nomFichier, type);
@@ -29,7 +29,7 @@ TypeMenu GestionnairePlats::getType() const {
 	return type_;
 }
 
-Plat* GestionnairePlats::allouerPlat(Plat* plat) { //TODO
+Plat* GestionnairePlats::allouerPlat(Plat* plat) {
 	Plat* unPlat = new Plat(*plat);
 	return unPlat;
 }
@@ -49,10 +49,11 @@ Plat* GestionnairePlats::trouverPlatPlusCher() const { //TODO
 }
 
 Plat* GestionnairePlats::trouverPlat(const string& nom) const { //TODO
-
+	return (find(conteneur_.begin(), conteneur_.end(), nom))->second;
 }
 
 vector<pair<string, Plat*>> GestionnairePlats::getPlatsEntre(double borneInf, double borneSup) { //TODO
+	conteneur_.begin()++;
 
 }
 

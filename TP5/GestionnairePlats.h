@@ -26,11 +26,11 @@ public:
 
 	~GestionnairePlats(); // TODO
 
-	TypeMenu getType() const; // TODO
+	TypeMenu getType() const; // 
 
-	Plat* allouerPlat(Plat* plat); // TODO
+	Plat* allouerPlat(Plat* plat); //
 
-	Plat* trouverPlatMoinsCher() const; // TODO
+	Plat* trouverPlatMoinsCher() const; // 
 	Plat* trouverPlatPlusCher() const; // TODO
 
 	Plat* trouverPlat(const string& nom) const; // TODO
