@@ -19,7 +19,7 @@ GestionnairePlats::GestionnairePlats(const string& nomFichier, TypeMenu type)
 
 GestionnairePlats::GestionnairePlats(GestionnairePlats* gestionnaire) {
 	type_ = gestionnaire->type_;
-	copy(gestionnaire->conteneur_.begin(), gestionnaire->conteneur_.end(), conteneur_);
+	conteneur_ = gestionnaire->conteneur_;
 }
 
 GestionnairePlats::~GestionnairePlats() {
@@ -35,29 +35,35 @@ Plat* GestionnairePlats::allouerPlat(Plat* plat) {
 	return unPlat;
 }
 
-Plat* GestionnairePlats::trouverPlatMoinsCher() const { //Pas certain de l'implementation du foncteur
-
-	FoncteurPlatMoinsCher foncteur;
-	return (min_element(conteneur_.begin(), conteneur_.end(), foncteur))->second;
+Plat* GestionnairePlats::trouverPlatMoinsCher() const {
+	
+	auto min = min_element(conteneur_.begin(), conteneur_.end(), FoncteurPlatMoinsCher());
+	return min->second;
 
 }
 
 Plat* GestionnairePlats::trouverPlatPlusCher() const {
 
-	return (max_element(conteneur_.begin(), conteneur_.end(),
-		[](pair<string, Plat*> a, pair<string, Plat*> b){ return a.second->getPrix() > b.second->getPrix(); }))->second;
-
-
+	auto max = [](const pair<string, Plat*> paire1, const pair<string, Plat*> paire2) -> bool {return paire1.second->getPrix() < paire2.second->getPrix(); };
+	return max_element(conteneur_.begin(), conteneur_.end(), max)->second;
 }
 
 Plat* GestionnairePlats::trouverPlat(const string& nom) const {
-	return (find(conteneur_.begin(), conteneur_.end(), nom))->second;
+	pair<string, Plat*> paire;
+	for (auto itr = conteneur_.begin(); itr != conteneur_.end(); itr++) {
+		paire = *itr;
+		if (paire.second->getNom() == nom) {
+			return paire.second;
+		}
+	}
+	return nullptr;
 }
 
 vector<pair<string, Plat*>> GestionnairePlats::getPlatsEntre(double borneInf, double borneSup) {
 
 	FoncteurIntervalle intervalle(borneInf, borneSup);
 	vector<pair<string, Plat*>> plats;
+
 	copy_if(conteneur_.begin(), conteneur_.end(), back_inserter(plats), intervalle);
 	return plats;
 }

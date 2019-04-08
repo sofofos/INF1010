@@ -27,18 +27,18 @@ protected:
 };
 
 template<typename T, typename C>
-inline C GestionnaireGenerique<T,C>::getConteneur() const {
+C GestionnaireGenerique<T,C>::getConteneur() const {
 	return conteneur_;
 }
 
 
 
 template<typename T, typename C> //demande
-inline void GestionnaireGenerique<T,C>::ajouter(T t) {
+void GestionnaireGenerique<T,C>::ajouter(T t) {
 	conteneur_.insert(t);
 }
 
 template<typename T, typename C>
-inline int GestionnaireGenerique<T,C>::getNombreElements() const {
+int GestionnaireGenerique<T,C>::getNombreElements() const {
 	return conteneur_.size();
 }

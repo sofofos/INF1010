@@ -19,25 +19,27 @@ Restaurant::Restaurant(const string& nomFichier, string_view nom, TypeMenu momen
 	nom_{nom},
 	momentJournee_{moment},
 	chiffreAffaire_{0},
-	menuMatin_{new GestionnaireGenerique{nomFichier, TypeMenu::Matin}},
-	menuMidi_ {new GestionnaireGenerique{nomFichier, TypeMenu::Midi }},
-	menuSoir_ {new GestionnaireGenerique{nomFichier, TypeMenu::Soir }},
 	fraisLivraison_{}
 {
-	tables_->lireTables(nomFichier); 
+	platMatin_ = new GestionnairePlats(nomFichier, TypeMenu::Matin);
+	platMidi_ = new GestionnairePlats(nomFichier, TypeMenu::Midi);
+	platSoir_ = new GestionnairePlats( nomFichier, TypeMenu::Soir);
+	tables_ = new GestionnaireTables();
+	
 	lireAdresses(nomFichier);
+
+	tables_->lireTables(nomFichier);
 }
 
 // Destructeur.
 Restaurant::~Restaurant()
 {
-	delete menuMatin_;
-	delete menuMidi_;
-	delete menuSoir_;
-	set<Table*> ens = tables_->getConteneur();
-	for (auto itr = ens.begin(); itr != ens.end(); itr++) {
-		delete *itr;
-	}
+	delete platMatin_;
+	delete platMidi_;
+	delete platSoir_;
+
+	delete tables_; 
+
 }
 
 
@@ -54,7 +56,8 @@ void Restaurant::setNom(string_view nom)
 }
 
  void  Restaurant::setChiffreAffaire( double chiffre)
-{ chiffreAffaire_ = chiffre;
+{ 
+	 chiffreAffaire_ = chiffre;
 }
 // Getters.
 
@@ -75,7 +78,7 @@ void Restaurant::libererTable(int id)
 {
 	if (Table* table = tables_->getTable(id)) {
 		chiffreAffaire_ += table->getChiffreAffaire(); 
-		chiffreAffaire_ += calculerReduction(table->getClientPrincipal(), table->getChiffreAffaire(), id == tables_[INDEX_TABLE_LIVRAISON]->getId());
+		chiffreAffaire_ += calculerReduction(table->getClientPrincipal(), table->getChiffreAffaire(), (id == ID_TABLE_LIVRAISON));
 		table->libererTable(); 
 	}
 }
@@ -109,7 +112,7 @@ ostream& operator<<(ostream& os, const Restaurant& restaurant)
 void Restaurant::commanderPlat(string_view nom, int idTable)
 {
 	if (Table* table = tables_->getTable(idTable); table && table->estOccupee())
-		if (Plat* plat = menuActuel()->trouverPlat(nom)) {
+		if (Plat* plat = menuActuel()->trouverPlat(string(nom))) {
 			table->commander(plat);
 			return;
 		}
@@ -128,7 +131,7 @@ bool Restaurant::placerClients(Client* client)
 
 	Table* meilleureTable = tables_->getMeilleureTable(tailleGroupe);
 
-	if (meilleureTable != nullptr && meilleureTable->estOccupee == false) {
+	if (meilleureTable != nullptr && meilleureTable->estOccupee() == false) {
 		meilleureTable->setClientPrincipal(client);
 		client->setTable(meilleureTable);
 		meilleureTable->placerClients(tailleGroupe);
@@ -174,9 +177,9 @@ double Restaurant::getFraisLivraison(ZoneHabitation zone) const
 GestionnairePlats* Restaurant::getMenu(TypeMenu typeMenu) const
 {
 	switch (typeMenu) {
-	case TypeMenu::Matin : return menuMatin_;
-	case TypeMenu::Midi  : return menuMidi_;
-	case TypeMenu::Soir  : return menuSoir_;
+	case TypeMenu::Matin : return platMatin_;
+	case TypeMenu::Midi  : return platMidi_;
+	case TypeMenu::Soir  : return platSoir_;
 	}
 	assert(false && "Le type du menu est invalide");
 	return nullptr;  // On ne devrait jamais se rendre � cette ligne.
@@ -187,7 +190,7 @@ GestionnairePlats* Restaurant::menuActuel() const
 	return getMenu(momentJournee_);
 }
 
-GestionnaireTables* Restaurant::getTables(int id) const
+GestionnaireTables* Restaurant::getTables() const
 {
 	return tables_;
 }
@@ -207,7 +210,7 @@ double Restaurant::getChiffreAffaire() {
 	return chiffreAffaire_;
 }
 
-string getNomTypeMenu(TypeMenu typeMenu)
+string Restaurant::getNomTypeMenu(TypeMenu typeMenu) const
 {
 	return string{nomsDesTypesDeMenu[static_cast<int>(typeMenu)]};
 }

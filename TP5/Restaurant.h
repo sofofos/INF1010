@@ -43,7 +43,7 @@ public:
 	string getNom() const;
 	TypeMenu getMoment() const;
     double getChiffreAffaire();
-	GestionnaireTables* getTables(int id) const; // TODO : À implémenter
+	GestionnaireTables* getTables() const; // TODO : À implémenter
 	GestionnairePlats* getMenu(TypeMenu typeMenu) const; 
 	double getFraisLivraison(ZoneHabitation zone) const;
 	string getNomTypeMenu(TypeMenu typeMenu) const;
@@ -78,9 +78,9 @@ private:
 
 	// TODO : Retirer les Menu et utiliser des GestionnairePlats* à la place.
 	// Differents menus en fonction du moment de la journ�e.
-	GestionnairePlats* menuMatin_;  //? "owner" est juste un indicateur que la classe est propri�taire des menus (et devra faire un "delete"), mais owner<Menu*> est �quivalent � Menu*; voir pointers.h .
-	GestionnairePlats* menuMidi_;
-	GestionnairePlats* menuSoir_;
+	GestionnairePlats* platMatin_;  //? "owner" est juste un indicateur que la classe est propri�taire des menus (et devra faire un "delete"), mais owner<Menu*> est �quivalent � Menu*; voir pointers.h .
+	GestionnairePlats* platMidi_;
+	GestionnairePlats* platSoir_;
 	
 	// Liste des tables.
 	// TODO: Retirer ce vecteur et utiliser un GestionnaireTables à la place.

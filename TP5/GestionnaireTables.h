@@ -12,13 +12,13 @@
 
 #include <set>
 
-class GestionnaireTables: public GestionnaireGenerique<Table*, set<Table*>> // TODO : Ajouter l'héritage done 
+class GestionnaireTables: public GestionnaireGenerique<Table*, set<Table*>> 
 {
 public:
 	GestionnaireTables() = default;
-	Table* getTable(int id) const; // TODO done
-	Table* getMeilleureTable(int tailleGroupe) const; // TODO done
+	Table* getTable(int id) const; 
+	Table* getMeilleureTable(int tailleGroupe) const; 
 	void lireTables(const string& nomFichier);
 
-	void afficherTables(ostream& os) const; // TODO done
+	void afficherTables(ostream& os) const; 
 };
