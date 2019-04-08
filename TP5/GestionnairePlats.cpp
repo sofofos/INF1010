@@ -36,29 +36,30 @@ Plat* GestionnairePlats::allouerPlat(Plat* plat) {
 }
 
 Plat* GestionnairePlats::trouverPlatMoinsCher() const { //Pas certain de l'implementation du foncteur
-	return (min_element(conteneur_.begin(), conteneur_.end(), FoncteurPlatMoinsCher()))->second;
+
+	FoncteurPlatMoinsCher foncteur;
+	return (min_element(conteneur_.begin(), conteneur_.end(), foncteur))->second;
 
 }
 
-Plat* GestionnairePlats::trouverPlatPlusCher() const { //pas certain
+Plat* GestionnairePlats::trouverPlatPlusCher() const {
 
 	return (max_element(conteneur_.begin(), conteneur_.end(),
 		[](pair<string, Plat*> a, pair<string, Plat*> b){ return a.second->getPrix() > b.second->getPrix(); }))->second;
+
+
 }
 
 Plat* GestionnairePlats::trouverPlat(const string& nom) const {
 	return (find(conteneur_.begin(), conteneur_.end(), nom))->second;
 }
 
-vector<pair<string, Plat*>> GestionnairePlats::getPlatsEntre(double borneInf, double borneSup) { //A implementer avec foncteurs
+vector<pair<string, Plat*>> GestionnairePlats::getPlatsEntre(double borneInf, double borneSup) {
+
+	FoncteurIntervalle intervalle(borneInf, borneSup);
 	vector<pair<string, Plat*>> plats;
-
-	map<string, Plat*>::iterator itr = conteneur_.begin();
-	for (itr; itr != conteneur_.end(); itr++)
-		if (itr->second->getPrix() > borneInf && itr->second->getPrix() < borneSup) {
-			plats.push_back(*itr);
-		}
-
+	copy_if(conteneur_.begin(), conteneur_.end(), back_inserter(plats), intervalle);
+	return plats;
 }
 
 void GestionnairePlats::lirePlats(const string& nomFichier, TypeMenu type)
