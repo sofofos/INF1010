@@ -2,7 +2,7 @@
 
 /*
 * Date : 3 avril 2019
-* Auteur : Pierre-Olivier Cï¿½tï¿½
+* Auteur : Pierre-Olivier Côté
 */
 
 Commande::Commande() {
@@ -17,14 +17,9 @@ void Commande::ajouterPlat(QString nomPlat) {
 }
 
 void Commande::retirerPlat(QString nomPlat) {
-
-	if(commande_.removeOne(nomPlat)){
+    if(commande_.removeOne(nomPlat)){
         emit commandeModifie();
-	} //TODO Done
-	else{
-		throw ErreurPlatIntrouvale(LABEL_MEAL_NOT_IN_MEN);
-	}
-
+    } //TODO
 }
 
 void Commande::viderCommande(){

@@ -68,7 +68,7 @@ private:
     Filtre* filtre_;
     Menu* menu_;
 
-
+    Ui::MainWindow *ui;
     QComboBox* widgetTypeMenu_;
     QCheckBox* widgetPlatsVeges_;
     QCheckBox* widgetPlatsBios_;
@@ -78,9 +78,6 @@ private:
     QPushButton* widgetRetirerPlat_;
     QLabel* widgetPrix_;
     QPushButton* widgetCommander_;
-    Ui::MainWindow *ui;
-
 };
-
 
 #endif // MAINWINDOW_H

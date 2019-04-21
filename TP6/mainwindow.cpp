@@ -49,7 +49,7 @@ void MainWindow::creerWidgetPlatsFiltres(){
     widgetPlatsFiltres_->setSortingEnabled(true);
 }
 
-//TODO DONE
+//TODO done
 void MainWindow::creerWidgetCommande() {
     widgetCommande_ = new QListWidget(this);
     widgetCommande_->setSortingEnabled(true);
@@ -67,7 +67,7 @@ void MainWindow::creerWidgetPrix() {
     widgetPrix_->setText(PRIX_STRING + "0" + DOLLAR_SIGN);
 }
 
-//TODO DONE
+//TODO done
 void MainWindow::creerWidgetCommander() {
     widgetCommander_ = new QPushButton(this);
     widgetCommander_->setText(COMMANDER);
@@ -75,7 +75,7 @@ void MainWindow::creerWidgetCommander() {
 
 
 
-//TODO Done
+//TODO done
 void MainWindow::designLayout() {
 
     QFrame* hLine = new QFrame();
@@ -123,18 +123,18 @@ void MainWindow::designLayout() {
 void MainWindow::connecterSignauxAuxSlots() {
     // connecter checkboxes filtre bio et vege
     QObject::connect(widgetPlatsVeges_, SIGNAL(stateChanged(int)),
-                     this, SLOT(clicOptionVege(int)));
+                     this, SLOT(clicOptionVege()));
     QObject::connect(widgetPlatsBios_, SIGNAL(stateChanged(int)),
-                     this, SLOT(clicOptionBio(int)));
+                     this, SLOT(clicOptionBio()));
 
     //connecter menu defilant type plat
     QObject::connect(widgetTypeMenu_, SIGNAL(currentIndexChanged(QString)),
                      this, SLOT(choixTypeMenu(QString)));
 
-    //TODO DONE
+    //TODO done
     //connecter boutons ajouterPlat et retirerPlat
-    QObject::connect(widgetAjouterPlat_, SIGNAL(clicked()), this, SLOT(insererPlatsChoisisDansCommande()));
-    QObject::connect(widgetRetirerPlat_, SIGNAL(clicked()), this, SLOT(retirerPlatsChoisisDeCommande()));
+    QObject::connect(widgetAjouterPlat_,SIGNAL(clicked()),this,SLOT(insererPlatsChoisisDansCommande()));
+    QObject::connect(widgetRetirerPlat_,SIGNAL(clicked()),this,SLOT(retirerPlatsChoisisDeCommande()));
 
     //connecter bouton commander
     QObject::connect(widgetCommander_, SIGNAL(clicked()),
@@ -165,18 +165,18 @@ void MainWindow::mettreAJourPlatsCommande(){
     }
 }
 
-//TODO Done
+//TODO done
 void MainWindow::insererPlatsChoisisDansCommande() {
-  commande_->ajouterPlat(widgetPlatsFiltres_->currentItem()->text());
+    commande_->ajouterPlat(widgetPlatsFiltres_->currentItem()->text());
 }
 
-//TODO Done
+//TODO
 void MainWindow::retirerPlatsChoisisDeCommande() {
     try{
         commande_->retirerPlat(widgetPlatsFiltres_->currentItem()->text());
-    }catch(ErreurPlatIntrouvable erreur){
-        message(erreur.what());
-    }
+        }catch(ErreurPlatIntrouvable erreur){
+            message(erreur.what());
+        }
 }
 
 void MainWindow::mettreAJourPrix() {

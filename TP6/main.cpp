@@ -9,7 +9,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QString chemin = "//home//sofos-alvagonza//Dropbox//School &  CVs//Polytechnique//Hiver2019//INF1010//INF1010//TP6"; // INSERER CHEMIN ABSOLU VERS polyFood.txt
+    QString chemin = "C://Users//justi//Desktop//version_eleves"; // INSERER CHEMIN ABSOLU VERS polyFood.txt
     try {
         Menu menu = Menu(chemin+FICHIER_POLYFOOD);
         Filtre filtre(&menu);
@@ -19,10 +19,11 @@ int main(int argc, char *argv[])
 
         //TODO
         //Connecter les mises a jour de la vue en fonction du modele (plats filtres + plats commande + prix)
-
-
         QObject::connect(&commande, SIGNAL(commandeModifie()), &mainGui, SLOT(mettreAJourPlatsCommande()));
-        QObject::connect(&filtre, SIGNAL(choixFiltrageModifie), &mainGui, SLOT(mettreAJourPlatsFiltres()));
+        QObject::connect(&commande, SIGNAL(commandeModifie()), &mainGui, SLOT(mettreAJourPrix()));
+        QObject::connect(&filtre, SIGNAL(choixFiltrageModifie()), &mainGui, SLOT(mettreAJourPlatsFiltres()));
+
+
 
 
         mainGui.show();

@@ -1,7 +1,7 @@
 /*
 * Date : 3 avril 2019
-* Auteur : Pierre-Olivier Cï¿½tï¿½
-*/
+* Auteur : Pierre-Olivier Côté
+*
 #include "MainGui.h"
 
 

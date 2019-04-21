@@ -1,7 +1,7 @@
 #ifndef DEF_H
 #define DEF_H
 
-#include "Plat.h"
+#include "plat.h"
 
 #include<string>
 #include <QString>
@@ -26,7 +26,7 @@ const QString LABEL_NO_MEAL = "Erreur: Vous n'avez rien commande";
 const QString LABEL_MEAL_NOT_FOUND = "Erreur: le plat n'est pas dans votre commande";
 const QString LABEL_MEAL_NOT_IN_MENU = "Erreur: le plat n'est pas dans le menu";
 const QString LABEL_COMMANDE_RECUE = "Commande reçue.\n Prix de votre achat: ";
-const QString FICHIER_POLYFOOD = "//polyFood.txt";
+const QString FICHIER_POLYFOOD = "\\polyFood.txt";
 
 static inline TypeMenu qstringToTypeMenu(QString type){
     if(type == MATIN){
